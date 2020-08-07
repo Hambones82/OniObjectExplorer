@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{E2387917-8745-4D6A-A3D3-1A307DAA460E}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ObjectExplorer</RootNamespace>
+    <AssemblyName>ObjectExplorer</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="0Harmony">
+      <HintPath>..\..\lib\0Harmony.dll</HintPath>
+    </Reference>
+    <Reference Include="Assembly-CSharp">
+      <HintPath>..\..\lib\Assembly-CSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Assembly-CSharp-firstpass">
+      <HintPath>..\..\lib\Assembly-CSharp-firstpass.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Unity.TextMeshPro">
+      <HintPath>..\..\lib\Unity.TextMeshPro.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine">
+      <HintPath>..\..\lib\UnityEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.AssetBundleModule">
+      <HintPath>..\..\lib\UnityEngine.AssetBundleModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>..\..\lib\UnityEngine.CoreModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.TextRenderingModule">
+      <HintPath>..\..\lib\UnityEngine.TextRenderingModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>..\..\lib\UnityEngine.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UIModule">
+      <HintPath>..\..\lib\UnityEngine.UIModule.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ObjectPool\ButtonCreator.cs" />
+    <Compile Include="Panels\ButtonPanel.cs" />
+    <Compile Include="ObjectPool\ButtonPoolFactory.cs" />
+    <Compile Include="Panels\ChildrenPanel.cs" />
+    <Compile Include="Panels\ComponentsPanel.cs" />
+    <Compile Include="InspectorGenerators\DefaultInspectorGenerator.cs" />
+    <Compile Include="Components\DisableKleiKeyboardOnSelect.cs" />
+    <Compile Include="ExplorerManager.cs" />
+    <Compile Include="Globals.cs" />
+    <Compile Include="InspectorGenerators\IInspectorGenerator.cs" />
+    <Compile Include="PrefabPostProcessors\ILoadedAssetPostProcessor.cs" />
+    <Compile Include="Components\InputFieldCallbacks.cs" />
+    <Compile Include="ObjectPool\InputFieldCreator.cs" />
+    <Compile Include="ObjectPool\InputFieldRecycler.cs" />
+    <Compile Include="ObjectPool\InspectorCreator.cs" />
+    <Compile Include="Panels\InspectorPanel.cs" />
+    <Compile Include="ObjectPool\InspectorPoolFactory.cs" />
+    <Compile Include="ObjectPool\InspectorRecycler.cs" />
+    <Compile Include="ObjectPool\IPoolObjectCreator.cs" />
+    <Compile Include="ObjectPool\IPoolObjectRecycler.cs" />
+    <Compile Include="ObjectPool\LabelCreator.cs" />
+    <Compile Include="ObjectPool\LabelRecycler.cs" />
+    <Compile Include="LoadedAssets.cs" />
+    <Compile Include="ObjectExplorerPatches.cs" />
+    <Compile Include="ObjectPool\ButtonRecycler.cs" />
+    <Compile Include="Panels\PathPanel.cs" />
+    <Compile Include="Components\PrefabTypeTag.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reticle.cs" />
+    <Compile Include="Panels\ScrollablePanel.cs" />
+    <Compile Include="ObjectPool\ToggleCreator.cs" />
+    <Compile Include="ObjectPool\ToggleRecycler.cs" />
+    <Compile Include="TUNING.cs" />
+    <Compile Include="ObjectPool\UIObjectPool.cs" />
+    <Compile Include="PrefabPostProcessors\UnityFieldAddCallbackComponentPostProcessor.cs" />
+    <Compile Include="PrefabPostProcessors\UnityFieldDisablesKleiKeyboardPostProcessor.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
