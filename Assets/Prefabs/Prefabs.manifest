@@ -1,0 +1,43 @@
+ManifestFileVersion: 0
+CRC: 1199674260
+AssetBundleManifest:
+  AssetBundleInfos:
+    Info_0:
+      Name: scrollview
+      Dependencies: {}
+    Info_1:
+      Name: objectbutton
+      Dependencies: {}
+    Info_2:
+      Name: pathbutton
+      Dependencies: {}
+    Info_3:
+      Name: pathview
+      Dependencies: {}
+    Info_4:
+      Name: reticle
+      Dependencies: {}
+    Info_5:
+      Name: componentsbutton
+      Dependencies: {}
+    Info_6:
+      Name: componentsview
+      Dependencies: {}
+    Info_7:
+      Name: inspectorcontrolpanel
+      Dependencies: {}
+    Info_8:
+      Name: inspectorlabel
+      Dependencies: {}
+    Info_9:
+      Name: inspectorinputfield
+      Dependencies: {}
+    Info_10:
+      Name: inspectorview
+      Dependencies: {}
+    Info_11:
+      Name: inspectordropdown
+      Dependencies: {}
+    Info_12:
+      Name: inspectortoggle
+      Dependencies: {}
