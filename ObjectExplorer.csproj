@@ -70,6 +70,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Components\ExplorerInputHandler.cs" />
+    <Compile Include="MoveHandle.cs" />
     <Compile Include="ObjectPool\ButtonCreator.cs" />
     <Compile Include="Panels\ButtonPanel.cs" />
     <Compile Include="ObjectPool\ButtonPoolFactory.cs" />

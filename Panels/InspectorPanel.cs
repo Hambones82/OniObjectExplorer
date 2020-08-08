@@ -118,7 +118,7 @@ namespace ObjectExplorer
 
         protected override void SetPosition()
         {
-            panel.GetComponent<RectTransform>().SetLocalPosition(new Vector3(-350, 0, 0));
+            panel.GetComponent<RectTransform>().SetLocalPosition(new Vector3(800, 0, 0));
         }
     }
 }

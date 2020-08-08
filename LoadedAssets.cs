@@ -25,7 +25,9 @@ namespace ObjectExplorer
             inspectorinputfield,
             inspectorview,
             inspectortoggle,
-            inspectordropdown
+            inspectordropdown,
+            debugcanvas,
+            movehandle
         }
 
         private static Dictionary<AssetEnums, AssetInFileDescriptor> assetDescriptors = new Dictionary<AssetEnums, AssetInFileDescriptor>()
@@ -42,7 +44,9 @@ namespace ObjectExplorer
             [AssetEnums.inspectorinputfield] = new AssetInFileDescriptor("inspectorinputfield", "InspectorInputField"),
             [AssetEnums.inspectorview] = new AssetInFileDescriptor("inspectorview", "InspectorView"),
             [AssetEnums.inspectortoggle] = new AssetInFileDescriptor("inspectortoggle", "InspectorToggle"),
-            [AssetEnums.inspectordropdown] = new AssetInFileDescriptor("inspectordropdown", "InspectorDropdown")
+            [AssetEnums.inspectordropdown] = new AssetInFileDescriptor("inspectordropdown", "InspectorDropdown"),
+            [AssetEnums.debugcanvas] = new AssetInFileDescriptor("debugcanvas", "DebugCanvas"),
+            [AssetEnums.movehandle] = new AssetInFileDescriptor("movehandle", "MoveHandle")
         };
 
         private static Dictionary<AssetEnums, GameObject> loadedPrefabs = new Dictionary<AssetEnums, GameObject>();

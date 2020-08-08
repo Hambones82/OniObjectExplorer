@@ -19,7 +19,7 @@ namespace ObjectExplorer
             panel.GetComponent<RectTransform>().anchorMax = new Vector2(0, 1);
             panel.GetComponent<RectTransform>().pivot = new Vector2(0, 0);
 
-            panel.GetComponent<RectTransform>().SetLocalPosition(new Vector3(250, -100, 0));
+            panel.GetComponent<RectTransform>().SetLocalPosition(new Vector3(260, -100, 0));
         }
 
         public override void SetCurrentGO(GameObject go)

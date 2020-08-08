@@ -21,5 +21,13 @@ namespace ObjectExplorer
                 public static Color textColor = new Color(0, 255, 0, 255);
             }
         }
+
+        public static class INPUT
+        {
+            public static class KEYS
+            {
+                public static KeyCode debugEnable = KeyCode.BackQuote;
+            }
+        }
     }
 }
