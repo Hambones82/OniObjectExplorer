@@ -71,6 +71,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Components\ExplorerInputHandler.cs" />
+    <Compile Include="Components\MoveHandleComponent.cs" />
     <Compile Include="MoveHandle.cs" />
     <Compile Include="ObjectPool\ButtonCreator.cs" />
     <Compile Include="Panels\ButtonPanel.cs" />
