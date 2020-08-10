@@ -46,11 +46,8 @@ namespace ObjectExplorer
             inspectorGenerators.Add(componentType, IG);
         }
 
-        //FIX THIS
         public void ClearInspectorControls()
         {
-            //have the generator remove its controls, then remove objects
-            //a little bit unclear...
             List<GameObject> inspectorControls = new List<GameObject>();
             foreach (GameObject contentObject in contentObjects)
             {
@@ -78,12 +75,9 @@ namespace ObjectExplorer
             currentComponent = C;
             currentInspectorGenerator = GetInspectorGenerator(C);
             ClearInspectorControls();
-            //collection of collection???  yes.
-            //for each list of gameobjects, you add each in order into a panel.  
-            //first make the panel as usual here...
+            
             foreach(List<GameObject> panelContents in currentInspectorGenerator.GetComponentControls(C))
             {
-                Debug.Log($"setting one of the components. -- number of objects is {panelContents.Count}");
                 //create a new panel...
                 GameObject newPanel = uIObjectPool.GetGameObject();
                 contentObjects.Add(newPanel);
@@ -95,7 +89,6 @@ namespace ObjectExplorer
                 newPanel.transform.SetParent(panelContent.transform);
                 newPanel.transform.SetAsFirstSibling();
             }
-            //JUtils.ObjectHierarchies.LogChildren(panelContent.transform, true, true);
         }
 
         private IInspectorGenerator GetInspectorGenerator(Component C)

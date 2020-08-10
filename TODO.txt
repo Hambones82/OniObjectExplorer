@@ -55,3 +55,14 @@ to detect input field... maybe we add a custom script with iselect handler...  c
 maybe add the onselects to all of the panels... or at least some of them.  then we can have some visual feedback (like a highlight) 
 showing how they are receiving the keyboard presses
 
+
+
+
+
+
+///
+
+globals.instance.modmanager?
+globals.instance.globalcanvas?
+
+//there's also some fun stuff in Game.Onspawn--> modmanager.notifydialog pauses the game... might be useful.

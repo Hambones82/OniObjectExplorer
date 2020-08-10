@@ -16,6 +16,7 @@ namespace ObjectExplorer
             public static void Prefix()
             {
                 LoadedAssets.LoadAssets();
+                LoadedAssets.RegisterPostProcessor(new InputFieldDialogPostProcessor());
                 LoadedAssets.RegisterPostProcessor(new UnityFieldDisablesKleiKeyboardPostProcessor());
                 LoadedAssets.RegisterPostProcessor(new UnityFieldAddCallbackComponentPostProcessor());
             }

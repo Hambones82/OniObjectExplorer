@@ -27,7 +27,10 @@ namespace ObjectExplorer
             inspectortoggle,
             inspectordropdown,
             debugcanvas,
-            movehandle
+            movehandle,
+            inputfielddialog,
+            menubutton,
+            menubuttonpanel
         }
 
         private static Dictionary<AssetEnums, AssetInFileDescriptor> assetDescriptors = new Dictionary<AssetEnums, AssetInFileDescriptor>()
@@ -46,7 +49,10 @@ namespace ObjectExplorer
             [AssetEnums.inspectortoggle] = new AssetInFileDescriptor("inspectortoggle", "InspectorToggle"),
             [AssetEnums.inspectordropdown] = new AssetInFileDescriptor("inspectordropdown", "InspectorDropdown"),
             [AssetEnums.debugcanvas] = new AssetInFileDescriptor("debugcanvas", "DebugCanvas"),
-            [AssetEnums.movehandle] = new AssetInFileDescriptor("movehandle", "MoveHandle")
+            [AssetEnums.movehandle] = new AssetInFileDescriptor("movehandle", "MoveHandle"),
+            [AssetEnums.inputfielddialog] = new AssetInFileDescriptor("inputfielddialog", "InputFieldDialog"),
+            [AssetEnums.menubutton] = new AssetInFileDescriptor("menubutton", "MenuButton"),
+            [AssetEnums.menubuttonpanel] = new AssetInFileDescriptor("menubuttonpanel", "MenuButtonPanel")
         };
 
         private static Dictionary<AssetEnums, GameObject> loadedPrefabs = new Dictionary<AssetEnums, GameObject>();
@@ -95,7 +101,9 @@ namespace ObjectExplorer
                     continue;
                 }
                 loadedPrefabs.Add(kvp.Key, loadedAsset);
-                
+
+                PrefabTypeTag typeTag = loadedAsset.AddComponent<PrefabTypeTag>();
+                typeTag.prefabType = kvp.Key;
             }
         }
         
@@ -103,8 +111,6 @@ namespace ObjectExplorer
         {
             GameObject returnVal = UnityEngine.Object.Instantiate(loadedPrefabs[assetType], parent);
 
-            PrefabTypeTag typeTag = returnVal.AddComponent<PrefabTypeTag>();
-            typeTag.prefabType = assetType;
 
             List<ILoadedAssetPostProcessor> ilppList;
             if(cachedPostProcessors.TryGetValue(assetType, out ilppList))
