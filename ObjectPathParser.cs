@@ -17,6 +17,7 @@ namespace ObjectExplorer
             //if(contains bad chars) return null
             
             string[] tokens = path.Split('.');
+            if (tokens.Length < 2) return null;
             Type classType = null;
             foreach (Assembly assem in assemblies)
             {

@@ -32,7 +32,7 @@ namespace ObjectExplorer
             menuRoot = new GameObject("DebugRoot");
 
             moveHandle = new MoveHandle(menuRoot, menuRoot);
-            moveHandle.moveHandle.GetComponent<RectTransform>().SetPosition(new Vector3(350, 150,0));
+            moveHandle.moveHandle.GetComponent<RectTransform>().SetPosition(new Vector3(350, 180,0));
 
             inputController = new GameObject("InputController");
             inputController.AddComponent<ExplorerInputHandler>().SetExplorerManager(this);
@@ -52,7 +52,7 @@ namespace ObjectExplorer
             dialogManager = new DialogManager();
 
             buttonMenu = new MainButtonMenu(menuRoot);
-            buttonMenu.SetPosition(new Vector2(0, 400));
+            buttonMenu.SetPosition(new Vector2(350, 165));
 
             Debug.Log($"Assembly qualified name of this: {typeof(ExplorerManager).AssemblyQualifiedName}");
             Debug.Log($"Assembly qualified name of global: {typeof(Global).AssemblyQualifiedName}");
