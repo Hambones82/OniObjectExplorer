@@ -1,5 +1,5 @@
 ManifestFileVersion: 0
-CRC: 1199674260
+CRC: 1565707286
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
@@ -40,4 +40,19 @@ AssetBundleManifest:
       Dependencies: {}
     Info_12:
       Name: inspectortoggle
+      Dependencies: {}
+    Info_13:
+      Name: debugcanvas
+      Dependencies: {}
+    Info_14:
+      Name: movehandle
+      Dependencies: {}
+    Info_15:
+      Name: inputfielddialog
+      Dependencies: {}
+    Info_16:
+      Name: menubutton
+      Dependencies: {}
+    Info_17:
+      Name: menubuttonpanel
       Dependencies: {}
