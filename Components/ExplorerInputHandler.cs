@@ -15,6 +15,12 @@ namespace ObjectExplorer
             if(Input.GetKeyDown(TUNING.INPUT.KEYS.debugEnable))
             {
                 explorerManager.SetActive(!explorerManager.active);
+                if(explorerManager.active == false)
+                {
+                    //REFACTOR - KLEI-RELATED STUFF IN NON-KLEI COMPONENT
+                    Global.Instance.GetInputManager().GetDefaultController().ToggleKeyboard(false);
+                    Global.Instance.GetInputManager().GetDefaultController().ToggleMouse(false);
+                }
             }
         }
 

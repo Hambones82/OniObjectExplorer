@@ -19,6 +19,7 @@ namespace ObjectExplorer
                 LoadedAssets.RegisterPostProcessor(new InputFieldDialogPostProcessor());
                 LoadedAssets.RegisterPostProcessor(new UnityFieldDisablesKleiKeyboardPostProcessor());
                 LoadedAssets.RegisterPostProcessor(new UnityFieldAddCallbackComponentPostProcessor());
+                LoadedAssets.RegisterPostProcessor(new OnMouseoverDisableKleiMousePostProcessor());
             }
         }
 

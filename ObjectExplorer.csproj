@@ -73,11 +73,13 @@
     <Compile Include="Components\ExplorerInputHandler.cs" />
     <Compile Include="Components\MoveHandleComponent.cs" />
     <Compile Include="DialogManager.cs" />
+    <Compile Include="DisableKleiMouseOnMouseover.cs" />
     <Compile Include="InternalRefs.cs" />
     <Compile Include="MainButtonMenu.cs" />
     <Compile Include="MoveHandle.cs" />
     <Compile Include="ObjectPathParser.cs" />
     <Compile Include="ObjectPool\ButtonCreator.cs" />
+    <Compile Include="PrefabPostProcessors\OnMouseoverDisableKleiMousePostProcessor.cs" />
     <Compile Include="Panels\ButtonPanel.cs" />
     <Compile Include="ObjectPool\ButtonPoolFactory.cs" />
     <Compile Include="Panels\ChildrenPanel.cs" />

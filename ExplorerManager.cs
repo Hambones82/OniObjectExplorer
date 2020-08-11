@@ -54,13 +54,9 @@ namespace ObjectExplorer
             buttonMenu = new MainButtonMenu(menuRoot);
             buttonMenu.SetPosition(new Vector2(350, 165));
 
-            Debug.Log($"Assembly qualified name of this: {typeof(ExplorerManager).AssemblyQualifiedName}");
-            Debug.Log($"Assembly qualified name of global: {typeof(Global).AssemblyQualifiedName}");
-
             //should be in the button menu itself? -- i think we should integrate this more into the menu..
             buttonMenu.AddButton("Open dialog", () => dialogManager.ActivateDialog((string s) => 
             {
-                Debug.Log("anon func is running");
                 GameObject browseTo = GameObjectPathParser.GetGOFromPath(s);
                 if(browseTo != null)
                 {

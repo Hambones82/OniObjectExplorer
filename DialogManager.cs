@@ -16,9 +16,9 @@ namespace ObjectExplorer
         public DialogManager()
         {
             inputFieldDialog = LoadedAssets.InstantiatePostProcessed(LoadedAssets.AssetEnums.inputfielddialog, Globals.DebugCanvas.transform);
-            Debug.Log("mark 1");
+            
             inputFieldDialog.GetComponent<InternalRefs>()["cancelbutton"].GetComponent<Button>().onClick.AddListener(DeactivateDialog);
-            Debug.Log("mark 2");
+            
             inputFieldDialog.SetActive(false);
             //cancel = 
         }

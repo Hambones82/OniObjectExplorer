@@ -30,7 +30,6 @@ namespace ObjectExplorer
 
         public bool CanProcess(GameObject go)
         {
-            //Debug.Log($"prefab type is {go.GetComponent<PrefabTypeTag>().ToString()}");
             if(go.GetComponent<PrefabTypeTag>().prefabType == LoadedAssets.AssetEnums.inputfielddialog)
             {
                 return true;

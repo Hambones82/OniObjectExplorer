@@ -1,40 +1,11 @@
 TO DO:
 
-eventually:
-	it'd be nice to move the scroll view and to toggle it with a hotkey like `
-	specific component inspectors
-	ability to move the menu itself
+fix scrolling
+Mouse click to see objects
+move handle can be attached to any window
+clean up scrolls
 
-ok, so generic inspectors...
-
-what exactly do i want?  i want to be able to say "draw inspector(component)" and have it return a list of gameobjects to fill into a panel
-so i kind of want a polymorphic draw inspector function.
-maybe what i want is a dictionary of draw functions that is referenced by type and associates to anonymous functions or whatever we want.  
-then we just check whether the type is in there and if so, call the function and return the gameobjects the function calls.  
-
-an alternate way would be to use if's but that's not extendible...
-
-gonna do the inspectors with the dictionary way...
-
-first need to refactor button pool as abstract
-
-
-wtf am i trying to do...???
-
-so the main thing is i want a function that returns the gameobjects to display.  i would probably have to set all the callbacks, whatever.
-what about the text fields... it's possible i need these inspector controls to be monobehaviours?  
-
-so how about this... the pool has these blank inspector controls.  i'd have a custom "blank" function
-
-i think the object would always be... label (left), entry (right), so always label, data, label, data...
-i think we should do this programmatically???  no... everything will be a prefab.  
-so the idea is... the function just generates game objects based on prefabs.
-
-
-
-
-
-
+fix disable/enable keyboard/mouse when i hit "`" key to disable overlay.
 
 
 re input: one way to solve this is to just use the klei elements, which handle all the event consuming, etc... 
@@ -66,3 +37,5 @@ globals.instance.modmanager?
 globals.instance.globalcanvas?
 
 //there's also some fun stuff in Game.Onspawn--> modmanager.notifydialog pauses the game... might be useful.
+
+nested types -- but need a good test case.
