@@ -1,0 +1,1 @@
+This is a mod for Oxygen Not Included that allows you to browse through and modify objects at runtime.  To get this to work, you need to move the prefabs in Assets/Prefabs to the mod folder /dev/ObjectExplorer/Assets.
