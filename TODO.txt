@@ -1,6 +1,7 @@
 TO DO:
 
-fix scrolling
+FIX OPEN DIALOG CRASH WHEN EMPTY
+
 Mouse click to see objects
 move handle can be attached to any window
 clean up scrolls

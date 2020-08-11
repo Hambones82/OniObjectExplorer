@@ -35,7 +35,8 @@ namespace ObjectExplorer
             moveHandle.moveHandle.GetComponent<RectTransform>().SetPosition(new Vector3(350, 180,0));
 
             inputController = new GameObject("InputController");
-            inputController.AddComponent<ExplorerInputHandler>().SetExplorerManager(this);
+            ExplorerInputHandler inputHandler = inputController.AddComponent<ExplorerInputHandler>();
+            inputHandler.SetExplorerManager(this);
 
             menuRoot.transform.parent = Globals.DebugCanvas.transform;
             RectTransform rectT = menuRoot.AddComponent<RectTransform>();
@@ -64,6 +65,11 @@ namespace ObjectExplorer
                     dialogManager.DeactivateDialog();
                 }
             }, STRINGS.DIALOGS.BROWSEBYPATH.TITLE, STRINGS.DIALOGS.BROWSEBYPATH.MESSAGE));
+            buttonMenu.AddButton("Inspect with RMB", () =>
+            {
+                inputHandler.inspecting = true;
+                //Global.Instance.GetInputManager().GetDefaultController().ToggleMouse(true);
+            });
 
         }
 
@@ -75,6 +81,7 @@ namespace ObjectExplorer
         
         public void SetCurrentGameObject(GameObject go)
         {
+            if (go == null) return;
             currentGameObject = go;
             childrenPanel.SetCurrentGO(go);
             pathPanel.SetCurrentGO(go);
@@ -85,7 +92,18 @@ namespace ObjectExplorer
         
         public void SetCurrentComponent(Component C)
         {
+            if (C == null) return;
             inspectorPanel.SetComponent(C);
+        }
+
+        public void ShowGameObjectList(List<GameObject> goList)
+        {
+            childrenPanel.ShowGOList(goList);
+            currentGameObject = null;
+            pathPanel.RemoveObjects();
+            componentsPanel.RemoveObjects();
+            inspectorPanel.ClearInspectorControls();
+            reticle.DeActivate();
         }
     }
 }

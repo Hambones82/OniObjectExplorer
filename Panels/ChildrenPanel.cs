@@ -22,6 +22,15 @@ namespace ObjectExplorer
             }
         }
 
+        public void ShowGOList(List<GameObject> goList)
+        {
+            RemoveObjects();
+            foreach(GameObject go in goList)
+            {
+                AddChildButton(go);
+            }
+        }
+
         private void AddChildButton(GameObject child)
         {
             GameObject childButton = uIObjectPool.GetGameObject();

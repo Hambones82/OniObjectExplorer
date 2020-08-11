@@ -11,14 +11,21 @@ namespace ObjectExplorer
     {
         public static GameObject GetGOFromPath(string path)
         {
+            if(path == null || path == "")
+            {
+                Debug.Log("path is empty, returning...");
+                return null;
+            }
             //if(contains bad chars) return null
 
             Debug.Log($"Attempting to parse path {path}");
 
             PathDescriptor pathDescriptor = FindType(path);
-            if(pathDescriptor.objectType == null)
+            
+            if(pathDescriptor?.objectType == null)
             {
                 Debug.Log("parser was unable to get type");
+                return null;
             }
             else
             {
@@ -113,8 +120,17 @@ namespace ObjectExplorer
 
             string[] tokens = typeString.Split('.');
 
-            if (tokens.Length < 2) return null;
-
+            if (tokens.Length < 2)
+            {
+                Debug.Log("Path is too short");
+                return null;
+            }
+            else if(tokens.Contains<string>(""))
+            {
+                Debug.Log("Invalid path");
+                return null;
+            }
+            
 
             //find the entire namespace by repeatedly lengthening the type to include more initial .-separated strings each iteration
             Type classType = null;

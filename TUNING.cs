@@ -26,7 +26,7 @@ namespace ObjectExplorer
         {
             public static class KEYS
             {
-                public static KeyCode debugEnable = KeyCode.BackQuote;
+                public static KeyCode debugEnable = KeyCode.Menu;
             }
         }
     }

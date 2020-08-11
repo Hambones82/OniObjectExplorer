@@ -12,7 +12,7 @@ namespace ObjectExplorer
             public static class BROWSEBYPATH
             {
                 public static readonly string TITLE = "Browse by path...";
-                public static readonly string MESSAGE = "Type in the path of the GameObject to browse to.  Paths start with a static class or a class that has a static member and follow normal object member dot-dereferencing semantics.";
+                public static readonly string MESSAGE = "Type in the path of the GameObject to browse to.  Paths start with an optional namespace, followed by a static class or a class that has a static member and follow normal object member dot-dereferencing semantics.";
             }
         }
     }
