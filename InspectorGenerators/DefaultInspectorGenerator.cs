@@ -230,9 +230,9 @@ namespace ObjectExplorer
             if(inspectorType == InspectorType.field)
             {
                 retVal = fieldPool.GetGameObject();
-                if (retVal.GetComponent<InputFieldCallbacks>() == null)
+                if (retVal.GetComponent<OnAcceptChangesCallbacks>() == null)
                     Debug.Log("if callbacks is null");
-                if (retVal.GetComponent<InputFieldCallbacks>().callBacks == null)
+                if (retVal.GetComponent<OnAcceptChangesCallbacks>().callBacks == null)
                 {
                     Debug.Log("component callbacks is null");
                 }
@@ -246,7 +246,7 @@ namespace ObjectExplorer
                     }
                     retInputField.interactable = false;
                 }
-                retVal.GetComponent<InputFieldCallbacks>().callBacks.AddListener(callback);
+                retVal.GetComponent<OnAcceptChangesCallbacks>().callBacks.AddListener(callback);
             }
             else
             {

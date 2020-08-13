@@ -20,11 +20,18 @@ namespace ObjectExplorer
 
             Debug.Log($"Attempting to parse path {path}");
 
-            PathDescriptor pathDescriptor = FindType(path);
-            
+            PathDescriptor pathDescriptor = FindTypeAndRemainder(path);
+            //pathdescriptor can be null -- return if so
+            //remainder can be null -- return if so
+            //remainder can be empty -- return if so
             if(pathDescriptor?.objectType == null)
             {
                 Debug.Log("parser was unable to get type");
+                return null;
+            }
+            else if(pathDescriptor?.remainder.Length == 0)
+            {
+                Debug.Log("type was found but there is no parameter or field name after the type name");
                 return null;
             }
             else
@@ -34,6 +41,8 @@ namespace ObjectExplorer
 
             string[] tokens = pathDescriptor.remainder;
             Type classType = pathDescriptor.objectType;
+            bool typeIsStatic = classType.IsAbstract && classType.IsSealed;
+            Debug.Log($"the entered type is static: {typeIsStatic.ToString()}");
 
             Debug.Log($"Searching for property {tokens[0]}");
             PropertyInfo currentProperty = classType.GetProperty(tokens[0]);
@@ -46,13 +55,38 @@ namespace ObjectExplorer
             }
             else if(currentProperty != null)
             {
-                currentObject = currentProperty.GetValue(null, null);
-                Debug.Log($"Found property {tokens[0]}");
+                //fix --> if type is not static and property is not static, this is an error...  should error out of window instead
+                //of throwing exception
+
+                //so two cases: type is static, property is not; or type is not static, property is
+                //if type is not static and first property is not static, we are unable to get this.  only matters for first property
+                //WORK ON THE BELOW -- NOT SURE IF CORRECT, BUT FIX AS NEEDED.
+                MethodInfo propertyGetterMethodInfo = currentProperty.GetGetMethod();
+                if((!typeIsStatic && propertyGetterMethodInfo.IsStatic) || typeIsStatic) //this is the valid case
+                {
+                    currentObject = currentProperty.GetValue(null, null);
+                    Debug.Log($"Found property {tokens[0]}");
+                }
+                else
+                {
+                    Debug.Log($"type {classType} is not static and property {tokens[0]} is not static.  A " +
+                        $"path only makes sense for a static type or a non-static type with a first static member.");
+                    return null;
+                }
             }
             else //if(currentField != null)
             {
-                currentObject = currentField.GetValue(null);
-                Debug.Log($"Found field {tokens[0]}");
+                if((!typeIsStatic && currentField.IsStatic) || typeIsStatic)
+                {
+                    currentObject = currentField.GetValue(null);
+                    Debug.Log($"Found field {tokens[0]}");
+                }
+                else
+                {
+                    Debug.Log($"type {classType} is not static and field {tokens[0]} is not static.  A " +
+                        $"path only makes sense for a static type or a non-static type with a first static member.");
+                    return null;
+                }
             }
             
             
@@ -108,19 +142,20 @@ namespace ObjectExplorer
                 return null;
             }
         }
+        
 
         //returns an array of size 1, 2, or 3
         //if 0, no type was found
         //if 1, no namespace
 
         //nested types...
-        public static PathDescriptor FindType(string typeString)
+        public static PathDescriptor FindTypeAndRemainder(string typeString)
         {
             Assembly[] assemblies = AppDomain.CurrentDomain.GetAssemblies();
 
             string[] tokens = typeString.Split('.');
 
-            if (tokens.Length < 2)
+            if (tokens.Length < 1)
             {
                 Debug.Log("Path is too short");
                 return null;
@@ -135,28 +170,34 @@ namespace ObjectExplorer
             //find the entire namespace by repeatedly lengthening the type to include more initial .-separated strings each iteration
             Type classType = null;
             string tryString = tokens[0];
+            if(tokens.Length == 1)
+            {
+                bool isValidType = IsStringValidType(assemblies, tryString, out classType);
+                if(!isValidType)
+                {
+                    Debug.Log("invalid type");
+                    return null;
+                }
+                else
+                {
+                    Debug.Log("type found");
+                    return new PathDescriptor(classType, new string[] { });
+                }
+            }
             int wordsTraversed = 1;
-            for (wordsTraversed = 1; wordsTraversed < tokens.Length; wordsTraversed++)
+            for (wordsTraversed = 1; wordsTraversed <= tokens.Length; wordsTraversed++)
             {
                 bool typeFound = false;
-                foreach (Assembly assem in assemblies)
-                {
-                    //
-                    classType = assem.GetType(tryString);
-                    if (classType != null)
-                    {
-                        Debug.Log($"Found assembly with type {tryString}");
-                        Debug.Log($"Assembly is: {assem.ToString()}");
-                        typeFound = true;
-                        break;//found the string
-                    }
-                }
+                typeFound = IsStringValidType(assemblies, tryString, out classType);
+                
                 if (typeFound == true)
                 {
+                    Debug.Log($"type found for type {tryString}");
                     break;
                 }
                 else
                 {
+                    Debug.Log($"type not found for type {tryString}");
                     tryString += "." + tokens[wordsTraversed];
                 }
             }
@@ -172,6 +213,24 @@ namespace ObjectExplorer
             return new PathDescriptor(classType, result);
         }
         
+        private static bool IsStringValidType(Assembly[] assemblies, string tryString, out Type classType)
+        {
+            bool typeFound = false;
+            classType = null;
+            foreach (Assembly assem in assemblies)
+            {
+                classType = assem.GetType(tryString);
+                if (classType != null)
+                {
+                    Debug.Log($"Found assembly with type {tryString}");
+                    Debug.Log($"Assembly is: {assem.ToString()}");
+                    typeFound = true;
+                    break;//found the string
+                }
+            }
+            return typeFound;
+        }
+
         //this would be more concise with an out parameter
         public class PathDescriptor
         {

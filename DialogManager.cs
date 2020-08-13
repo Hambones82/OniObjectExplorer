@@ -28,6 +28,7 @@ namespace ObjectExplorer
             inputFieldDialog.SetActive(true);
             InternalRefs refs = inputFieldDialog.GetComponent<InternalRefs>();
             InputField inputField = refs["input"].GetComponent<InputField>();
+            inputField.text = "";
             inputField.onEndEdit.RemoveAllListeners();
             inputField.onEndEdit.AddListener(callBack);
             refs["title"].GetComponent<Text>().text = title;
@@ -37,6 +38,7 @@ namespace ObjectExplorer
         public void DeactivateDialog()
         {
             inputFieldDialog.SetActive(false);
+
         }
     }
 }

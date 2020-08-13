@@ -70,6 +70,39 @@ namespace ObjectExplorer
                 inputHandler.inspecting = true;
                 //Global.Instance.GetInputManager().GetDefaultController().ToggleMouse(true);
             });
+            buttonMenu.AddButton("New UI", () =>
+            {
+                GameObject gameObject = new GameObject("New UI");
+                gameObject.AddComponent<RectTransform>();
+                gameObject.transform.SetParent(Globals.DebugCanvas.transform);
+                SetCurrentGameObject(gameObject);
+            });
+            buttonMenu.AddButton("Add Component", () =>
+            {
+                dialogManager.ActivateDialog((string s) =>
+                {
+                    Type type = GameObjectPathParser.FindTypeAndRemainder(s)?.objectType;
+                    if(type == null)
+                    {
+                        Debug.Log("Add component dialog: invalid type entered");
+                        //Button button;
+                        return;
+                    }
+                    else
+                    {
+                        currentGameObject.AddComponent(type);
+                        dialogManager.DeactivateDialog();
+                        SetCurrentGameObject(currentGameObject);
+                    }
+                });
+            });
+            buttonMenu.AddButton("Add Child", () =>
+            {
+                GameObject child = new GameObject("child");
+                child.AddComponent<RectTransform>();
+                child.transform.SetParent(currentGameObject.transform);
+                SetCurrentGameObject(child);
+            });
 
         }
 
