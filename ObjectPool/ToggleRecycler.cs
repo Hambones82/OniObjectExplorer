@@ -11,7 +11,7 @@ namespace ObjectExplorer
     {
         public GameObject RecycleObject(GameObject go)
         {
-            go.GetComponentInChildren<Toggle>().onValueChanged.RemoveAllListeners();
+            go.GetComponent<ToggleCallbacks>().callBacks.RemoveAllListeners();
             go.transform.Find("Background/Checkmark").GetComponent<Image>().color =
                         TUNING.CONTROLS.EDITABLE.textColor;
             go.GetComponent<Toggle>().interactable = true;

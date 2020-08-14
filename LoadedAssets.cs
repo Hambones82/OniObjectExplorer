@@ -107,7 +107,7 @@ namespace ObjectExplorer
             }
         }
         
-        public static GameObject InstantiatePostProcessed(AssetEnums assetType, Transform parent = null)
+        public static GameObject InstantiatePostProcessed(AssetEnums assetType, Transform parent = null, object parameters = null)
         {
             GameObject returnVal = UnityEngine.Object.Instantiate(loadedPrefabs[assetType], parent);
 
@@ -117,7 +117,7 @@ namespace ObjectExplorer
             {
                 foreach (ILoadedAssetPostProcessor ilpp in ilppList)
                 {
-                    ilpp.AssetPostProcess(returnVal);
+                    ilpp.AssetPostProcess(returnVal, parameters);
                 }
             }
             //returnVal.transform.SetParent(parent);

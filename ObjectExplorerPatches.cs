@@ -20,6 +20,8 @@ namespace ObjectExplorer
                 LoadedAssets.RegisterPostProcessor(new UnityFieldDisablesKleiKeyboardPostProcessor());
                 LoadedAssets.RegisterPostProcessor(new UnityFieldAddCallbackComponentPostProcessor());
                 LoadedAssets.RegisterPostProcessor(new OnMouseoverDisableKleiMousePostProcessor());
+                LoadedAssets.RegisterPostProcessor(new UnityToggleAddCallbackComponentPostProcessor());
+                LoadedAssets.RegisterPostProcessor(new UnityFieldAddRefreshPostProcessor());
             }
         }
 

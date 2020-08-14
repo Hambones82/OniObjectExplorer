@@ -9,7 +9,7 @@ namespace ObjectExplorer
 {
     public class OnMouseoverDisableKleiMousePostProcessor : ILoadedAssetPostProcessor
     {
-        public GameObject AssetPostProcess(GameObject go)
+        public GameObject AssetPostProcess(GameObject go, object parameters = null)
         {
             go.AddComponent<DisableKleiMouseOnMouseover>();
             return go;

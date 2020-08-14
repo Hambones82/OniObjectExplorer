@@ -10,7 +10,7 @@ namespace ObjectExplorer
     {
         public InputFieldDialogPostProcessor() { }
 
-        public GameObject AssetPostProcess(GameObject go)
+        public GameObject AssetPostProcess(GameObject go, object parameters = null)
         {
             GameObject cancelButton = go.transform.GetChild(3).gameObject;
             GameObject title = go.transform.Find("Image/Text").gameObject;

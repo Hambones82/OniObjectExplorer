@@ -9,13 +9,13 @@ namespace ObjectExplorer
 {
     public class UnityFieldAddCallbackComponentPostProcessor : ILoadedAssetPostProcessor
     {
-        public GameObject AssetPostProcess(GameObject go)
+        public GameObject AssetPostProcess(GameObject go, object parameters = null)
         {
             InputField[] components = go.GetComponentsInChildren<InputField>();
             
             foreach(InputField iF in components)
             {
-                OnAcceptChangesCallbacks ifCallbacks = iF.gameObject.AddComponent<OnAcceptChangesCallbacks>();
+                InputFieldCallbacks ifCallbacks = iF.gameObject.AddComponent<InputFieldCallbacks>();
                 iF.onEndEdit.AddListener((string s) => ifCallbacks.callBacks.Invoke(s));
             }
             return go;

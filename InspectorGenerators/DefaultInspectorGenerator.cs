@@ -21,11 +21,11 @@ namespace ObjectExplorer
         private UIObjectPool fieldPool;
         private UIObjectPool togglePool;
 
-        public DefaultInspectorGenerator()
+        public DefaultInspectorGenerator(ExplorerManager eManager)
         {
             labelPool = new UIObjectPool(new LabelCreator(labelType), new LabelRecycler());
-            fieldPool = new UIObjectPool(new InputFieldCreator(inputFieldType), new InputFieldRecycler());
-            togglePool = new UIObjectPool(new ToggleCreator(toggleType), new ToggleRecycler());
+            fieldPool = new UIObjectPool(new InputFieldCreator(inputFieldType, eManager), new InputFieldRecycler());
+            togglePool = new UIObjectPool(new ToggleCreator(toggleType, eManager), new ToggleRecycler());
         }
         
         public IEnumerable<List<GameObject>> GetComponentControls(Component c)
@@ -230,11 +230,11 @@ namespace ObjectExplorer
             if(inspectorType == InspectorType.field)
             {
                 retVal = fieldPool.GetGameObject();
-                if (retVal.GetComponent<OnAcceptChangesCallbacks>() == null)
+                if (retVal.GetComponent<InputFieldCallbacks>() == null)
                     Debug.Log("if callbacks is null");
-                if (retVal.GetComponent<OnAcceptChangesCallbacks>().callBacks == null)
+                if (retVal.GetComponent<InputFieldCallbacks>().callBacks == null)
                 {
-                    Debug.Log("component callbacks is null");
+                    Debug.Log("component's callbacks is null");
                 }
                 InputField retInputField = retVal.GetComponent<InputField>();
                 retInputField.text = currentValue.ToString();
@@ -246,7 +246,7 @@ namespace ObjectExplorer
                     }
                     retInputField.interactable = false;
                 }
-                retVal.GetComponent<OnAcceptChangesCallbacks>().callBacks.AddListener(callback);
+                retVal.GetComponent<InputFieldCallbacks>().callBacks.AddListener(callback);
             }
             else
             {
@@ -264,6 +264,12 @@ namespace ObjectExplorer
             if (inspectorType == InspectorType.checkbox)
             {
                 retVal = togglePool.GetGameObject();
+                if (retVal.GetComponent<ToggleCallbacks>() == null)
+                    Debug.Log("toggle callbacks is null");
+                if (retVal.GetComponent<ToggleCallbacks>().callBacks == null)
+                {
+                    Debug.Log("component's callbacks is null");
+                }
                 Toggle toggle = retVal.GetComponent<Toggle>();
                 toggle.isOn = (bool)currentValue;
                 if (!canEdit)
@@ -272,7 +278,7 @@ namespace ObjectExplorer
                         TUNING.CONTROLS.NONEDITABLE.textColor;
                     retVal.GetComponent<Toggle>().interactable = false;
                 }
-                retVal.GetComponent<Toggle>().onValueChanged.AddListener(callback);
+                retVal.GetComponent<ToggleCallbacks>().callBacks.AddListener(callback);
             }
             else
             {

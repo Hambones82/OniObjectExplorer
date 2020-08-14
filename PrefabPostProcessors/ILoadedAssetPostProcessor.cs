@@ -9,6 +9,6 @@ namespace ObjectExplorer
     public interface ILoadedAssetPostProcessor
     {
         bool CanProcess(GameObject go);
-        GameObject AssetPostProcess(GameObject go);
+        GameObject AssetPostProcess(GameObject go, object parameters = null);
     }
 }

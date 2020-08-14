@@ -27,7 +27,7 @@ namespace ObjectExplorer
         {
             uIObjectPool = InspectorPoolFactory.GetInspectorPool(holderType);
             inspectorGenerators = new Dictionary<Type, IInspectorGenerator>();
-            defaultInspectorGenerator = new DefaultInspectorGenerator();
+            defaultInspectorGenerator = new DefaultInspectorGenerator(eManager);
             currentComponent = null;
         }
 

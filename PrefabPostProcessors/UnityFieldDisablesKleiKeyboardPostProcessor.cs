@@ -11,7 +11,7 @@ namespace ObjectExplorer
     //i already have the component --it's "disablekleikeyboardonselect"
     public class UnityFieldDisablesKleiKeyboardPostProcessor : ILoadedAssetPostProcessor
     {
-        public GameObject AssetPostProcess(GameObject go)
+        public GameObject AssetPostProcess(GameObject go, object parameters = null)
         {
             InputField[] components = go.GetComponentsInChildren<InputField>();
             foreach(InputField iF in components)

@@ -14,6 +14,7 @@ namespace ObjectExplorer
         public bool active { get; private set; }
 
         private GameObject currentGameObject;
+        private Component currentComponent;
         
         private PathPanel pathPanel;
         private ChildrenPanel childrenPanel;
@@ -121,12 +122,23 @@ namespace ObjectExplorer
             componentsPanel.SetCurrentGO(go);
             inspectorPanel.ClearInspectorControls();
             reticle.SetCurrentGameObject(go);
+            currentComponent = null;
         }
         
         public void SetCurrentComponent(Component C)
         {
             if (C == null) return;
+            currentComponent = C;
             inspectorPanel.SetComponent(C);
+        }
+
+        //fix.  possibly: just refresh all values of the controls, instead of deleting them all, cleaning them up, and re-instating...
+        //i might need to modify the controls to be actual components...  
+        public void Refresh()
+        {
+            //Component cachedCurrentComponent = currentComponent;
+            //SetCurrentGameObject(currentGameObject);
+            //SetCurrentComponent(cachedCurrentComponent);
         }
 
         public void ShowGameObjectList(List<GameObject> goList)
