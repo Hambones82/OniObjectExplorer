@@ -1,42 +1,8 @@
 TO DO:
 
-FIX OPEN DIALOG CRASH WHEN EMPTY
+fix controls -- should be monobehaviour class with appropriate functionality such as storing component/property/field
+-will require lots of changes
+-edits to post processor, creator
+-edits to defaultinspectorgenerator
+-try field first
 
-Mouse click to see objects
-move handle can be attached to any window
-clean up scrolls
-
-fix disable/enable keyboard/mouse when i hit "`" key to disable overlay.
-
-
-re input: one way to solve this is to just use the klei elements, which handle all the event consuming, etc... 
-it seems it just converts a unity input event into a klei input event
-
-kinputcontroller
-kinputhandler
-kbuttonevent
-
-
-so for getinputmanager... i think i need to 
-
-disable mouse while mouse over a panel
-disable keyboard while editing a control
-
-to detect input field... maybe we add a custom script with iselect handler...  call it disablekleikeyboardonselect
-
-maybe add the onselects to all of the panels... or at least some of them.  then we can have some visual feedback (like a highlight) 
-showing how they are receiving the keyboard presses
-
-
-
-
-
-
-///
-
-globals.instance.modmanager?
-globals.instance.globalcanvas?
-
-//there's also some fun stuff in Game.Onspawn--> modmanager.notifydialog pauses the game... might be useful.
-
-nested types -- but need a good test case.

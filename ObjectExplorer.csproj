@@ -74,6 +74,7 @@
     <Compile Include="Components\MoveHandleComponent.cs" />
     <Compile Include="DialogManager.cs" />
     <Compile Include="DisableKleiMouseOnMouseover.cs" />
+    <Compile Include="Components\InputFieldControl.cs" />
     <Compile Include="InternalRefs.cs" />
     <Compile Include="MainButtonMenu.cs" />
     <Compile Include="MoveHandle.cs" />
@@ -108,7 +109,7 @@
     <Compile Include="Components\PrefabTypeTag.cs" />
     <Compile Include="PrefabPostProcessors\InputFieldDialogPostProcessor.cs" />
     <Compile Include="Components\ToggleCallbacks.cs" />
-    <Compile Include="PrefabPostProcessors\UnityFieldAddRefreshPostProcessor.cs" />
+    <Compile Include="PrefabPostProcessors\AddInspectorFieldComponentPostProcessor.cs" />
     <Compile Include="PrefabPostProcessors\UnityToggleAddCallbackComponentPostProcessor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reticle.cs" />

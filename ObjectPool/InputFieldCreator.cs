@@ -5,21 +5,21 @@ using System.Text;
 using UnityEngine;
 
 namespace ObjectExplorer
-{
+{//remove the explorer manager thing 
     public class InputFieldCreator : IPoolObjectCreator
     {
         private LoadedAssets.AssetEnums fieldPrefabType;
-        private ExplorerManager eManager;
+        
 
-        public InputFieldCreator(LoadedAssets.AssetEnums fieldType, ExplorerManager eManager)
+        public InputFieldCreator(LoadedAssets.AssetEnums fieldType)
         {
             fieldPrefabType = fieldType;
-            this.eManager = eManager;
+            
         }
 
         public GameObject CreateNewPoolObject()
         {
-            GameObject retVal = LoadedAssets.InstantiatePostProcessed(fieldPrefabType, Globals.DebugCanvas.transform, eManager);
+            GameObject retVal = LoadedAssets.InstantiatePostProcessed(fieldPrefabType, Globals.DebugCanvas.transform);
             retVal.SetActive(false);
             return retVal;
         }

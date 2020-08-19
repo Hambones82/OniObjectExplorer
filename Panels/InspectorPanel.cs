@@ -87,7 +87,7 @@ namespace ObjectExplorer
                 }
                 newPanel.SetActive(true);
                 newPanel.transform.SetParent(panelContent.transform);
-                newPanel.transform.SetAsFirstSibling();
+                newPanel.transform.SetAsLastSibling();
             }
         }
 
