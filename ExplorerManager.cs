@@ -43,7 +43,7 @@ namespace ObjectExplorer
             RectTransform rectT = menuRoot.AddComponent<RectTransform>();
             rectT.anchorMin = new Vector2(.5f, .5f);
             rectT.anchorMax = new Vector2(.5f, .5f);
-            rectT.SetLocalPosition(new Vector3(0, 0, 0));
+            rectT.SetLocalPosition(new Vector3(-350, -200, 0));
             childrenPanel = new ChildrenPanel(menuRoot, this);
             pathPanel = new PathPanel(menuRoot, this);
             inspectorPanel = new InspectorPanel(menuRoot, this);
@@ -68,7 +68,7 @@ namespace ObjectExplorer
             }, STRINGS.DIALOGS.BROWSEBYPATH.TITLE, STRINGS.DIALOGS.BROWSEBYPATH.MESSAGE));
             buttonMenu.AddButton("Inspect with RMB", () =>
             {
-                inputHandler.inspecting = true;
+                inputHandler.inspecting = true; //ugly...??  have a separate class handle this -- shouldn't be too hard.
                 //Global.Instance.GetInputManager().GetDefaultController().ToggleMouse(true);
             });
             buttonMenu.AddButton("New UI", () =>
@@ -86,7 +86,6 @@ namespace ObjectExplorer
                     if(type == null)
                     {
                         Debug.Log("Add component dialog: invalid type entered");
-                        //Button button;
                         return;
                     }
                     else

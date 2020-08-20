@@ -51,9 +51,11 @@ namespace ObjectExplorer
             List<GameObject> inspectorControls = new List<GameObject>();
             foreach (GameObject contentObject in contentObjects)
             {
-                Debug.Log($"number of children is {contentObject.transform.childCount}");
-                inspectorControls.Add(contentObject.transform.GetChild(0).gameObject);
-                inspectorControls.Add(contentObject.transform.GetChild(1).gameObject);
+                int childNum = contentObject.transform.childCount;
+                for(int i = 0; i < childNum; i++)
+                {
+                    inspectorControls.Add(contentObject.transform.GetChild(i).gameObject); //fix
+                }
             }
             if(currentInspectorGenerator != null)
             {
@@ -65,10 +67,10 @@ namespace ObjectExplorer
             {
                 Debug.Log("inspector generator is null -- should only happen once"); //ok, this is supposed to happen once...
             }
-            RemoveObjects();
+            RemoveObjects(); //refactor -- have remove objects be virtual, override it here.  put the clear inspector controls stuff in 
+                             //(or call it) and then call base.removeobjects.
+                             //could also put all panels in manager into an array or list and call the remove objects method on each element
         }
-
-        
 
         public void SetComponent(Component C)
         {

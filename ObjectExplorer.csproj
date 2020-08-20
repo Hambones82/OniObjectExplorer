@@ -70,6 +70,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Components\ControlBase.cs" />
     <Compile Include="Components\ExplorerInputHandler.cs" />
     <Compile Include="Components\MoveHandleComponent.cs" />
     <Compile Include="DialogManager.cs" />

@@ -66,64 +66,104 @@ namespace ObjectExplorer
                 Type pType = properties[i].PropertyType;
                 if(!ExcludedTypes.Contains(pType) && UniversalPermittedPropertyTypes.Contains(pType))
                 {
-                    foreach (List<GameObject> goList in GetPropertyControls(c, properties[i]))
+                    foreach (List<GameObject> goList in GetMemberControls(c, properties[i]))
                     {
                         yield return goList;
                     }
                 }
             }
+            FieldInfo[] fields = c.GetType().GetFields();
+            for (int i = 0; i < fields.Length; i++)
+            {
+                Type fType = fields[i].FieldType;
+                if (UniversalPermittedPropertyTypes.Contains(fType))
+                {
+                    foreach(List<GameObject> goList in GetMemberControls(c, fields[i]))
+                    {
+                        yield return goList;
+                    }
+
+                }
+            }
             yield break;
         }
 
-        //the order is wrong... reverse setasfirst / setaslast...
-        //we can actually keep much of this... remove the anonymous functions, though.
-        //we can even keep "getlabelobject," which just generates a label.
-
+        
             //still only properties..
-        public IEnumerable<List<GameObject>> GetPropertyControls(Component c, PropertyInfo propertyInfo/*, string prefix = ""*/)
+        public IEnumerable<List<GameObject>> GetMemberControls(Component c, MemberInfo memberInfo)
         {
-            if (!propertyInfo.CanRead) yield break;
-            bool canEdit = propertyInfo.CanWrite;
+            Type memberType;
 
-            FieldInfo[] fields = propertyInfo.PropertyType.GetFields();
-
-            if(basicTypes.Contains(propertyInfo.PropertyType))
+            if (memberInfo.MemberType == MemberTypes.Property)
+            {
+                if (!((PropertyInfo)memberInfo).CanRead) yield break;
+                memberType = ((PropertyInfo)memberInfo).PropertyType;
+            }
+            else if (memberInfo.MemberType == MemberTypes.Field)
+            {
+                memberType = ((FieldInfo)memberInfo).FieldType;
+            }
+            else throw new InvalidOperationException("member must be a field or a property");
+            
+            if(basicTypes.Contains(memberType))
             {
                 List<GameObject> returnObject = new List<GameObject>();
-                returnObject.Add(GetLabelObject(propertyInfo.Name));
-                returnObject.Add(GetIFieldObject(c, propertyInfo));
+                returnObject.Add(GetLabelObject(memberInfo.Name));
+                returnObject.Add(GetIFieldObject(c, memberInfo));
                 yield return returnObject;
             }
             else
             {
-                foreach(FieldInfo field in fields)
+                FieldInfo[] fields = memberType.GetFields();
+                foreach (FieldInfo field in fields)
                 {
                     if(field.IsStatic || field.IsLiteral || field.IsInitOnly)
                     {
                         continue;
                     }
+                    if (!basicTypes.Contains(field.FieldType)) continue;
                     List<GameObject> returnObject = new List<GameObject>();
-                    returnObject.Add(GetLabelObject(propertyInfo.Name + "." + field.Name));
-                    returnObject.Add(GetIFieldObject(c, propertyInfo, field));
+                    returnObject.Add(GetLabelObject(memberInfo.Name + "." + field.Name));
+                    returnObject.Add(GetIFieldObject(c, memberInfo, field));
                     yield return returnObject;
                 }
-                        
+                
+                PropertyInfo[] properties = memberType.GetProperties();
+                foreach(PropertyInfo property in properties)
+                {
+                    if (!UniversalPermittedPropertyTypes.Contains(property.PropertyType)) continue;
+                    if (property.GetIndexParameters().Length != 0) continue;
+                    if (!basicTypes.Contains(property.PropertyType)) continue;
+                    List<GameObject> returnObject = new List<GameObject>();
+                    returnObject.Add(GetLabelObject(memberInfo.Name + "." + property.Name));
+                    returnObject.Add(GetIFieldObject(c, memberInfo, property));
+                    yield return returnObject;
+                }
+                     
             }
             yield break;
         }
 
-        private GameObject GetIFieldObject(Component C, PropertyInfo propertyInfo, FieldInfo subField = null)
+        /*
+        private GameObject GetContentObject(Component C, PropertyInfo propertyInfo, FieldInfo subField = null)
+        {
+            GameObject contentObject;
+            if()
+        }
+        */
+
+        private GameObject GetIFieldObject(Component C, MemberInfo memberInfo, MemberInfo subMember = null)
         {
             GameObject contentObject = fieldPool.GetGameObject();
             InputFieldControl ifControl = contentObject.GetComponent<InputFieldControl>();
-            ifControl.SetTarget(C, propertyInfo, subField);
+            ifControl.SetTarget(C, memberInfo, subMember);
             contentObject.SetActive(true);
             return contentObject;
         }
 
-        private GameObject GetLabelObject(Component c, PropertyInfo propertyInfo, string suffix = "", string prefix = "")
+        private GameObject GetLabelObject(Component c, MemberInfo memberInfo, string suffix = "", string prefix = "")
         {
-            return GetLabelObject(prefix + propertyInfo.Name + suffix);
+            return GetLabelObject(prefix + memberInfo.Name + suffix);
         }
 
         private GameObject GetLabelObject(string s)
