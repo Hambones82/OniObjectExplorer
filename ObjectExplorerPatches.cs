@@ -22,6 +22,7 @@ namespace ObjectExplorer
                 LoadedAssets.RegisterPostProcessor(new OnMouseoverDisableKleiMousePostProcessor());
                 LoadedAssets.RegisterPostProcessor(new UnityToggleAddCallbackComponentPostProcessor());
                 LoadedAssets.RegisterPostProcessor(new AddInspectorFieldComponentPostProcessor());
+                LoadedAssets.RegisterPostProcessor(new AddInspectorToggleComponentPostProcessor());
             }
         }
 

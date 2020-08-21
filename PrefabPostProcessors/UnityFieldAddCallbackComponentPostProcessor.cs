@@ -16,7 +16,7 @@ namespace ObjectExplorer
             foreach(InputField iF in components)
             {
                 InputFieldCallbacks ifCallbacks = iF.gameObject.AddComponent<InputFieldCallbacks>();
-                iF.onEndEdit.AddListener((string s) => ifCallbacks.callBacks.Invoke(s));
+                iF.onEndEdit.AddListener(ifCallbacks.callBacks.Invoke);
             }
             return go;
         }

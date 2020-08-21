@@ -43,7 +43,7 @@ namespace ObjectExplorer
         //not sure about this one...
         public virtual void SetCurrentGO(GameObject go) { }
 
-        public void RemoveObjects()
+        public virtual void RemoveObjects()
         {
             foreach (GameObject g in contentObjects)
             {

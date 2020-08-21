@@ -19,12 +19,8 @@ namespace ObjectExplorer
             ExplorerManager explorerManager = (ExplorerManager)parameters;
             foreach (Toggle t in components)
             {
-                ToggleCallbacks tCallbacks = t.gameObject.AddComponent<ToggleCallbacks>();
-                t.onValueChanged.AddListener((bool b) => tCallbacks.callBacks.Invoke(b));
-                //this doesn't work.  i suspect the reason is that refreshing can change the value of other toggles
-                //and those toggles will call their onvalue changes, and so on.
-                //potentially, look into onpointerclick to see if this issue can be fixed.
-                //t.onValueChanged.AddListener((bool b) => explorerManager.Refresh());
+                ToggleHelper tCallbacks = t.gameObject.AddComponent<ToggleHelper>();
+                t.onValueChanged.AddListener(tCallbacks.callBacks.Invoke);
             }
             return go;
         }

@@ -1,8 +1,4 @@
 TO DO:
 
-fix controls -- should be monobehaviour class with appropriate functionality such as storing component/property/field
--will require lots of changes
--edits to post processor, creator
--edits to defaultinspectorgenerator
--try field first
+
 

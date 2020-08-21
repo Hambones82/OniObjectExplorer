@@ -14,11 +14,7 @@ namespace ObjectExplorer
         protected static readonly LoadedAssets.AssetEnums labelType = LoadedAssets.AssetEnums.inspectorlabel;
         protected static readonly LoadedAssets.AssetEnums fieldType = LoadedAssets.AssetEnums.inspectorinputfield;
 
-        private Dictionary<Type, IInspectorGenerator> inspectorGenerators;
-
-        private IInspectorGenerator defaultInspectorGenerator;
-
-        private IInspectorGenerator currentInspectorGenerator;
+        private InspectorGenerator inspectorGenerator;
 
         private Component currentComponent;
 
@@ -26,27 +22,17 @@ namespace ObjectExplorer
             :base(parent, eManager, LoadedAssets.AssetEnums.inspectorview)
         {
             uIObjectPool = InspectorPoolFactory.GetInspectorPool(holderType);
-            inspectorGenerators = new Dictionary<Type, IInspectorGenerator>();
-            defaultInspectorGenerator = new DefaultInspectorGenerator(eManager);
+            inspectorGenerator = new InspectorGenerator(eManager);
             currentComponent = null;
         }
 
-        public void RegisterInspectorGenerator(Type componentType, IInspectorGenerator IG)
+        public override void RemoveObjects()
         {
-            if(!(componentType.IsAssignableFrom(typeof(Component))))
-            {
-                Debug.Log("specified component type is not a component");
-                return;
-            }
-            if(inspectorGenerators.ContainsKey(componentType))
-            {
-                Debug.Log("specified inspector generator is already registered");
-                return;
-            }
-            inspectorGenerators.Add(componentType, IG);
+            ClearInspectorControls();
+            base.RemoveObjects();
         }
 
-        public void ClearInspectorControls()
+        private void ClearInspectorControls()
         {
             List<GameObject> inspectorControls = new List<GameObject>();
             foreach (GameObject contentObject in contentObjects)
@@ -57,28 +43,15 @@ namespace ObjectExplorer
                     inspectorControls.Add(contentObject.transform.GetChild(i).gameObject); //fix
                 }
             }
-            if(currentInspectorGenerator != null)
-            {
-                //this probably doesn't work...  well.. maybe it does???  no bc you set it based on new component... but want old component
-                //to do the cleanup...
-                currentInspectorGenerator.ClearInspectorControls(inspectorControls);
-            }
-            else
-            {
-                Debug.Log("inspector generator is null -- should only happen once"); //ok, this is supposed to happen once...
-            }
-            RemoveObjects(); //refactor -- have remove objects be virtual, override it here.  put the clear inspector controls stuff in 
-                             //(or call it) and then call base.removeobjects.
-                             //could also put all panels in manager into an array or list and call the remove objects method on each element
+            inspectorGenerator.ClearInspectorControls(inspectorControls);
         }
 
         public void SetComponent(Component C)
         {
             currentComponent = C;
-            currentInspectorGenerator = GetInspectorGenerator(C);
             ClearInspectorControls();
             
-            foreach(List<GameObject> panelContents in currentInspectorGenerator.GetComponentControls(C))
+            foreach(List<GameObject> panelContents in inspectorGenerator.GetComponentControls(C))
             {
                 //create a new panel...
                 GameObject newPanel = uIObjectPool.GetGameObject();
@@ -91,24 +64,6 @@ namespace ObjectExplorer
                 newPanel.transform.SetParent(panelContent.transform);
                 newPanel.transform.SetAsLastSibling();
             }
-        }
-
-        private IInspectorGenerator GetInspectorGenerator(Component C)
-        {
-            IInspectorGenerator IG;
-            if(inspectorGenerators.TryGetValue(C.GetType(), out IG))
-            {
-                return IG;
-            }
-            else
-            {
-                return GetDefaultInspectorGenerator();
-            }
-        }
-
-        private IInspectorGenerator GetDefaultInspectorGenerator()
-        {
-            return defaultInspectorGenerator;
         }
 
         protected override void SetPosition()

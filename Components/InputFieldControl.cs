@@ -15,7 +15,7 @@ namespace ObjectExplorer
        
         public InputField inputField; //in abstract class, selectable?  or just nothing?  probably nothing, define here.
         
-        public override void Refresh()  //must be defined in derived
+        public override void Refresh()  
         {
             object value = GetCurrentValue();
             if (value == null)

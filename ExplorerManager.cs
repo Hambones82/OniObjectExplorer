@@ -119,7 +119,7 @@ namespace ObjectExplorer
             childrenPanel.SetCurrentGO(go);
             pathPanel.SetCurrentGO(go);
             componentsPanel.SetCurrentGO(go);
-            inspectorPanel.ClearInspectorControls();
+            inspectorPanel.RemoveObjects();
             reticle.SetCurrentGameObject(go);
             currentComponent = null;
         }
@@ -146,7 +146,7 @@ namespace ObjectExplorer
             currentGameObject = null;
             pathPanel.RemoveObjects();
             componentsPanel.RemoveObjects();
-            inspectorPanel.ClearInspectorControls();
+            inspectorPanel.RemoveObjects();
             reticle.DeActivate();
         }
     }
