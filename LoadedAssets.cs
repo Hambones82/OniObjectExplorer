@@ -30,7 +30,8 @@ namespace ObjectExplorer
             movehandle,
             inputfielddialog,
             menubutton,
-            menubuttonpanel
+            menubuttonpanel,
+            pointerblocker
         }
 
         private static Dictionary<AssetEnums, AssetInFileDescriptor> assetDescriptors = new Dictionary<AssetEnums, AssetInFileDescriptor>()
@@ -52,7 +53,8 @@ namespace ObjectExplorer
             [AssetEnums.movehandle] = new AssetInFileDescriptor("movehandle", "MoveHandle"),
             [AssetEnums.inputfielddialog] = new AssetInFileDescriptor("inputfielddialog", "InputFieldDialog"),
             [AssetEnums.menubutton] = new AssetInFileDescriptor("menubutton", "MenuButton"),
-            [AssetEnums.menubuttonpanel] = new AssetInFileDescriptor("menubuttonpanel", "MenuButtonPanel")
+            [AssetEnums.menubuttonpanel] = new AssetInFileDescriptor("menubuttonpanel", "MenuButtonPanel"),
+            [AssetEnums.pointerblocker] = new AssetInFileDescriptor("pointerblocker", "PointerBlocker")
         };
 
         private static Dictionary<AssetEnums, GameObject> loadedPrefabs = new Dictionary<AssetEnums, GameObject>();

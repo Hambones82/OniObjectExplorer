@@ -9,12 +9,41 @@ namespace ObjectExplorer
 {
     public class ExplorerInputHandler : MonoBehaviour
     {
-        public bool inspecting = false;
+        private bool inspecting = false;
 
         private ExplorerManager explorerManager;
 
+        private GameObject pointerBlocker;
+
+        public void StartInspecting()
+        {
+            inspecting = true;
+            pointerBlocker.SetActive(true);
+        }
+
+        public void EndInspecting()
+        {
+            inspecting = false;
+            pointerBlocker.SetActive(false);
+        }
+
+        public void Start()
+        {
+            pointerBlocker = LoadedAssets.InstantiatePostProcessed(LoadedAssets.AssetEnums.pointerblocker, Globals.DebugCanvas.transform);
+            pointerBlocker.SetActive(false);
+        }
+
+        public Vector2 GetMousePosition()
+        {
+            return Input.mousePosition;
+        }
+
         public void Update()
         {
+            if(inspecting)
+            {
+                //pointerBlocker.GetComponent<RectTransform>().SetPosition(GetMousePosition());
+            }
             if(Input.GetKeyDown(TUNING.INPUT.KEYS.debugEnable))
             {
                 explorerManager.SetActive(!explorerManager.active);
@@ -30,7 +59,7 @@ namespace ObjectExplorer
                     //but for all the input fields... we do need a better 
                 }
             }
-            if (Input.GetMouseButtonDown(1) && inspecting == true)
+            if (Input.GetMouseButtonDown(0) && inspecting == true)
             {
                 Debug.Log("Showing raycast results:...");
                 List<RaycastResult> raycastResults = new List<RaycastResult>();
@@ -43,7 +72,7 @@ namespace ObjectExplorer
                     explorerManager.ShowGameObjectList(goList);
                     //Debug.Log(r.gameObject.name);
                 }
-                inspecting = false;
+                EndInspecting();
                 //StartCoroutine(ExecuteAfterTime)
                 //Global.Instance.GetInputManager().GetDefaultController().ToggleMouse(false);
             }

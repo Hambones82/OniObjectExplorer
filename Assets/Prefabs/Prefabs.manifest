@@ -1,5 +1,5 @@
 ManifestFileVersion: 0
-CRC: 3852595545
+CRC: 1319261663
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
@@ -55,4 +55,7 @@ AssetBundleManifest:
       Dependencies: {}
     Info_17:
       Name: menubuttonpanel
+      Dependencies: {}
+    Info_18:
+      Name: pointerblocker
       Dependencies: {}

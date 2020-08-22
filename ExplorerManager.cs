@@ -57,7 +57,7 @@ namespace ObjectExplorer
             buttonMenu.SetPosition(new Vector2(350, 165));
 
             //should be in the button menu itself? -- i think we should integrate this more into the menu..
-            buttonMenu.AddButton("Open dialog", () => dialogManager.ActivateDialog((string s) => 
+            buttonMenu.AddButton("Browse by Path", () => dialogManager.ActivateDialog((string s) => 
             {
                 GameObject browseTo = GameObjectPathParser.GetGOFromPath(s);
                 if(browseTo != null)
@@ -66,9 +66,9 @@ namespace ObjectExplorer
                     dialogManager.DeactivateDialog();
                 }
             }, STRINGS.DIALOGS.BROWSEBYPATH.TITLE, STRINGS.DIALOGS.BROWSEBYPATH.MESSAGE));
-            buttonMenu.AddButton("Inspect with RMB", () =>
+            buttonMenu.AddButton("Inspect", () =>
             {
-                inputHandler.inspecting = true; //ugly...??  have a separate class handle this -- shouldn't be too hard.
+                inputHandler.StartInspecting(); //ugly...??  have a separate class handle this -- shouldn't be too hard.
                 //Global.Instance.GetInputManager().GetDefaultController().ToggleMouse(true);
             });
             buttonMenu.AddButton("New UI", () =>

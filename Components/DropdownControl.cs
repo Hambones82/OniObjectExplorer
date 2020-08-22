@@ -21,7 +21,6 @@ namespace ObjectExplorer
             enumValueIndices.Clear();
         }
 
-        //probably still need to set all the pulldown values even if not editable...
         protected override void InitializeUIComponent()
         {
             if (!canEdit)
@@ -43,7 +42,7 @@ namespace ObjectExplorer
 
         public override void Refresh()
         {
-            object value = currentTargetValue;//this is going to be probably an int... possibly it will be expressed as an enum
+            object value = currentTargetValue;
             
             int valueToSet = enumValueIndices.First((KeyValuePair<int, object> kvp) => object.Equals(kvp.Value, value)).Key;
             
@@ -53,7 +52,6 @@ namespace ObjectExplorer
 
         public override void SetValue(int valueIn)
         {
-            Debug.Log("calling set value for dropdown");
             currentTargetValue = enumValueIndices[valueIn];
         }
 
