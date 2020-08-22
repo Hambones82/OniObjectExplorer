@@ -28,6 +28,31 @@ namespace ObjectExplorer
 
         protected bool canEdit;
 
+        protected Type currentTargetType
+        {
+            get
+            {
+                return currentTargetValue.GetType();
+            }
+        }
+        protected object currentTargetValue
+        {
+            get
+            {
+                return hasSubMember ? currentComponentSubMember : currentComponentMember;
+            }
+            set
+            {
+                if(hasSubMember)
+                {
+                    currentComponentSubMember = value;
+                }
+                else
+                {
+                    currentComponentMember = value;
+                }
+            }
+        }
         protected object currentComponentMember
         {
             get
@@ -232,20 +257,6 @@ namespace ObjectExplorer
         }
 
         protected virtual void InitializeUIComponent() {}
-
-        protected object GetCurrentValue()
-        {
-            object retVal;
-            if (!hasSubMember)
-            {
-                retVal = currentComponentMember;
-            }
-            else
-            {
-                retVal = currentComponentSubMember;
-            }
-            return retVal;
-        }
 
         public virtual void Refresh() { }
 

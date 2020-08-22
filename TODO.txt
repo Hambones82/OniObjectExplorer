@@ -1,4 +1,8 @@
 TO DO:
 
+- add pulldown component, make appropriate changes to generator
+- refresh periodically and on value changed
+- make the input (and other stuff) generic
+	- as part of genericizing, add all parts that need to have game-dependencies to a special folder.
 
-
+-improve the type checking in inspector generator by creating a function in the specifications thing.

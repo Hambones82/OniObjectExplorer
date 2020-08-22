@@ -71,18 +71,23 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Components\ControlBase.cs" />
+    <Compile Include="Components\DropdownControl.cs" />
+    <Compile Include="Components\DropdownHelper.cs" />
     <Compile Include="Components\ExplorerInputHandler.cs" />
     <Compile Include="Components\MoveHandleComponent.cs" />
     <Compile Include="DialogManager.cs" />
     <Compile Include="Components\DisableKleiMouseOnMouseover.cs" />
     <Compile Include="Components\InputFieldControl.cs" />
-    <Compile Include="InternalRefs.cs" />
+    <Compile Include="Components\InternalRefs.cs" />
+    <Compile Include="ObjectPool\DropdownRecycler.cs" />
+    <Compile Include="ObjectPool\DropdownCreator.cs" />
     <Compile Include="MainButtonMenu.cs" />
     <Compile Include="MoveHandle.cs" />
     <Compile Include="ObjectPathParser.cs" />
     <Compile Include="ObjectPool\ButtonCreator.cs" />
-    <Compile Include="Panels\InspectorSpecifications.cs" />
+    <Compile Include="InspectorSpecifications.cs" />
     <Compile Include="Components\ToggleControl.cs" />
+    <Compile Include="PrefabPostProcessors\AddInspectorDropdownComponentPostProcessor.cs" />
     <Compile Include="PrefabPostProcessors\AddInspectorToggleComponentPostProcessor.cs" />
     <Compile Include="PrefabPostProcessors\OnMouseoverDisableKleiMousePostProcessor.cs" />
     <Compile Include="Panels\ButtonPanel.cs" />
@@ -105,7 +110,7 @@
     <Compile Include="ObjectPool\IPoolObjectRecycler.cs" />
     <Compile Include="ObjectPool\LabelCreator.cs" />
     <Compile Include="ObjectPool\LabelRecycler.cs" />
-    <Compile Include="Components\LoadedAssets.cs" />
+    <Compile Include="LoadedAssets.cs" />
     <Compile Include="ObjectExplorerPatches.cs" />
     <Compile Include="ObjectPool\ButtonRecycler.cs" />
     <Compile Include="Panels\PathPanel.cs" />

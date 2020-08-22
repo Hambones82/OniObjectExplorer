@@ -13,21 +13,11 @@ namespace ObjectExplorer
 
         public override void Refresh()
         {
-            object value = GetCurrentValue();
-            toggleHelper.SetIsOn((bool)value);
+            //object value = GetCurrentValue();
+            toggleHelper.SetIsOn((bool)currentTargetValue);
         }
 
-        public override void SetValue(bool valueIn)
-        {
-            if(hasSubMember)
-            {
-                currentComponentSubMember = valueIn;
-            }
-            else
-            {
-                currentComponentMember = valueIn;
-            }
-        }
+        public override void SetValue(bool valueIn) => currentTargetValue = valueIn;
         
         protected override void InitializeUIComponent()
         {

@@ -15,7 +15,6 @@ namespace ObjectExplorer
             ToggleControl control = go.AddComponent<ToggleControl>();
             control.toggleHelper = helper;
             Toggle toggle = go.GetComponent<Toggle>();
-            //toggle.onValueChanged.AddListener(helper.callBacks.Invoke);
             control.toggle = toggle;
             helper.toggleElement = toggle;
             helper.callBacks.AddListener(control.SetValue);

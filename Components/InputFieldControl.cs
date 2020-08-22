@@ -17,7 +17,7 @@ namespace ObjectExplorer
         
         public override void Refresh()  
         {
-            object value = GetCurrentValue();
+            object value = currentTargetValue;
             if (value == null)
             {
                 inputField.text = "";
@@ -53,19 +53,8 @@ namespace ObjectExplorer
             }
             if(succeeded)
             {
-                Debug.Log($"succeeded in parsing input {valueIn}.");
-                Debug.Log($"parsed value is {setVal.ToString()}");
-                Debug.Log($"type of parsed value is {setVal.GetType()}");
-                if (hasSubMember) 
-                {
-                    currentComponentSubMember = setVal;
-                }
-                else 
-                {
-                    currentComponentMember = setVal;
-                }
+                currentTargetValue = setVal;
             }
-            
         }
 
         protected override void InitializeUIComponent()
