@@ -3,7 +3,7 @@ This is a mod for Oxygen Not Included that allows you to browse through and modi
 The inspectors allow you to view various members of components of gameobjects.  
 This mod supports viewing "basic type" members at depth 0 or basic type members at depth 1 that are members of non-basic type memebers at depth 0.  
 In other words, a member of a component that is a primitive type (e.g., int, bool, string, float), can be viewed.  
-In addition, a member of a struct that is, itself, a member of a component, can be viewed, as long as the member of the struct is a primitive type.  
+In addition, a member of a non-basic field or property that is, itself, a member of a component, can be viewed, as long as the member of the struct is a primitive type.  
 In the code, a member at depth 0 is called a member and a member at depth 1 is called a sub-member.
 
 The object explorer allows for customization of the specific members of components that are viewable, as well as the specific sub-members that are viewable.  
