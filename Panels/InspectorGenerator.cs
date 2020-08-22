@@ -12,6 +12,11 @@ namespace ObjectExplorer
     
     public class InspectorGenerator
     {
+        private GameObject timerObject;
+        private Timer timer;
+
+        private List<ControlBase> currentContentObjects = new List<ControlBase>();
+
         private static LoadedAssets.AssetEnums labelType = LoadedAssets.AssetEnums.inspectorlabel;
         private static LoadedAssets.AssetEnums inputFieldType = LoadedAssets.AssetEnums.inspectorinputfield;
         private static LoadedAssets.AssetEnums toggleType = LoadedAssets.AssetEnums.inspectortoggle;
@@ -28,11 +33,18 @@ namespace ObjectExplorer
             fieldPool = new UIObjectPool(new InputFieldCreator(inputFieldType), new InputFieldRecycler());
             togglePool = new UIObjectPool(new ToggleCreator(toggleType, eManager), new ToggleRecycler());
             dropdownPool = new UIObjectPool(new DropdownCreator(dropdownType), new DropdownRecycler());
+
+            timerObject = new GameObject("timer");
+            timer = timerObject.AddComponent<Timer>();
+            timer.period = TUNING.CONTROLS.REFRESH_RATE;
+            timer.timerCallback += RefreshInspectors;
+            timerObject.SetActive(true);
         }
         
         public IEnumerable<List<GameObject>> GetComponentControls(Component c)
         {
             Debug.Log("getting inspectors");
+            currentContentObjects.Clear();
             Type cType = c.GetType();
             if(InspectorSpecifications.ComponentSpecifications.ContainsKey(cType))
             {
@@ -189,6 +201,7 @@ namespace ObjectExplorer
         {
             GameObject contentObject = dropdownPool.GetGameObject();
             DropdownControl dControl = contentObject.GetComponent<DropdownControl>();
+            currentContentObjects.Add(dControl);
             dControl.SetTarget(C, memberInfo, subMemberInfo);
             contentObject.SetActive(true);
             return contentObject;
@@ -198,6 +211,7 @@ namespace ObjectExplorer
         {
             GameObject contentObject = togglePool.GetGameObject();
             ToggleControl tControl = contentObject.GetComponent<ToggleControl>();
+            currentContentObjects.Add(tControl);
             tControl.SetTarget(C, memberInfo, subMemberInfo);
             contentObject.SetActive(true);
             return contentObject;
@@ -207,6 +221,7 @@ namespace ObjectExplorer
         {
             GameObject contentObject = fieldPool.GetGameObject();
             InputFieldControl ifControl = contentObject.GetComponent<InputFieldControl>();
+            currentContentObjects.Add(ifControl);
             ifControl.SetTarget(C, memberInfo, subMember);
             contentObject.SetActive(true);
             return contentObject;
@@ -252,7 +267,11 @@ namespace ObjectExplorer
 
         public void RefreshInspectors()
         {
-            //throw new NotImplementedException();
+            Debug.Log("refreshing...");
+            foreach(ControlBase cb in currentContentObjects)
+            {
+                cb.Refresh();
+            }
         }
     }
 }

@@ -17,6 +17,7 @@ namespace ObjectExplorer
         
         public override void Refresh()  
         {
+            if (inputField.isFocused) return;
             object value = currentTargetValue;
             if (value == null)
             {

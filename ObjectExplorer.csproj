@@ -59,6 +59,9 @@
     <Reference Include="UnityEngine.CoreModule">
       <HintPath>..\..\lib\UnityEngine.CoreModule.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEngine.PhysicsModule">
+      <HintPath>..\..\lib\UnityEngine.PhysicsModule.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.TextRenderingModule">
       <HintPath>..\..\lib\UnityEngine.TextRenderingModule.dll</HintPath>
     </Reference>
@@ -71,6 +74,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Components\ControlBase.cs" />
+    <Compile Include="Components\ControlBaseNonGeneric.cs" />
     <Compile Include="Components\DropdownControl.cs" />
     <Compile Include="Components\DropdownHelper.cs" />
     <Compile Include="Components\ExplorerInputHandler.cs" />
@@ -87,6 +91,7 @@
     <Compile Include="ObjectPool\ButtonCreator.cs" />
     <Compile Include="InspectorSpecifications.cs" />
     <Compile Include="Components\ToggleControl.cs" />
+    <Compile Include="Timer.cs" />
     <Compile Include="PrefabPostProcessors\AddInspectorDropdownComponentPostProcessor.cs" />
     <Compile Include="PrefabPostProcessors\AddInspectorToggleComponentPostProcessor.cs" />
     <Compile Include="PrefabPostProcessors\OnMouseoverDisableKleiMousePostProcessor.cs" />

@@ -33,9 +33,11 @@ namespace ObjectExplorer
             object[] enumValues = Enum.GetValues(currentTargetType).Cast<object>().ToArray();
             for (int i = 0; i < enumValues.Length; i++)
             {
-                enumValueIndices.Add(i, enumValues.GetValue(i));
+                enumValueIndices.Add(i+1, enumValues.GetValue(i));
             }
-            dropdown.AddOptions(enumValues.Select<object, string>((o, s) => o.ToString()).ToList<string>());
+            List<string> options = enumValues.Select<object, string>((o, s) => o.ToString()).ToList<string>();
+            options.Insert(0, "");
+            dropdown.AddOptions(options);
             dropdown.RefreshShownValue();
             
         }
@@ -44,7 +46,7 @@ namespace ObjectExplorer
         {
             object value = currentTargetValue;
             
-            int valueToSet = enumValueIndices.First((KeyValuePair<int, object> kvp) => object.Equals(kvp.Value, value)).Key;
+            int valueToSet = enumValueIndices.FirstOrDefault((KeyValuePair<int, object> kvp) => object.Equals(kvp.Value, value)).Key;
             
             dropdownHelper.SetValue(valueToSet);
             dropdown.RefreshShownValue();
@@ -52,7 +54,13 @@ namespace ObjectExplorer
 
         public override void SetValue(int valueIn)
         {
-            currentTargetValue = enumValueIndices[valueIn];
+            //if trygetvalue, then set...
+            object setVal;
+            if(enumValueIndices.TryGetValue(valueIn, out setVal))
+            {
+                currentTargetValue = setVal;
+            }
+            //currentTargetValue = enumValueIndices[valueIn];
         }
 
     }

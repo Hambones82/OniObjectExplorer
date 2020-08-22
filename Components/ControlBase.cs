@@ -8,7 +8,7 @@ using System.Reflection;
 //maybe generic with two parameters -- property/field type and control type...
 namespace ObjectExplorer
 {
-    public abstract class ControlBase<T> : MonoBehaviour
+    public abstract class ControlBase<T> : ControlBase
     {
         protected Component currentComponent;
 
@@ -233,6 +233,10 @@ namespace ObjectExplorer
                         canEdit = true;
                     }
                 }
+                if(isField)
+                {
+                    canEdit = true;
+                }
             }
             else //has sub member
             {
@@ -258,7 +262,7 @@ namespace ObjectExplorer
 
         protected virtual void InitializeUIComponent() {}
 
-        public virtual void Refresh() { }
+        public override void Refresh() { }
 
         public virtual void SetValue (T valueIn) { }
     }

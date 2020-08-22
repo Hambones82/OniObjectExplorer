@@ -32,11 +32,16 @@ namespace ObjectExplorer
         {
             Vector3[] fourCorners = new Vector3[4];
             RectTransform rT = GO.GetComponent<RectTransform>();
+            //Transform t = GO.GetComponent<Transform>();
             if (rT != null)
             {
                 rT.GetWorldCorners(fourCorners);
                 SetCorners(fourCorners);
             }
+            /*else if (t != null)
+            {
+                SetOnePoint(t.position);
+            }*/
             else
             {
                 DeActivate();
@@ -49,6 +54,16 @@ namespace ObjectExplorer
             {
                 corners[i].GetComponent<RectTransform>().SetPosition(fourcorners[i]);
                 corners[i].SetActive(true);
+            }
+        }
+
+        public void SetOnePoint(Vector3 point)
+        {
+            corners[0].GetComponent<RectTransform>().SetPosition(point);
+            corners[0].SetActive(true);
+            for(int i = 1; i < 4; i++)
+            {
+                corners[i].SetActive(false);
             }
         }
 

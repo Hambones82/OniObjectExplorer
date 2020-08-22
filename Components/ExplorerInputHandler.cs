@@ -69,9 +69,15 @@ namespace ObjectExplorer
                 foreach (RaycastResult r in raycastResults)
                 {
                     goList.Add(r.gameObject);
-                    explorerManager.ShowGameObjectList(goList);
-                    //Debug.Log(r.gameObject.name);
                 }
+                //custom get objects
+                List<KSelectable> selectables = new List<KSelectable>();
+                SelectTool.Instance.GetSelectablesUnderCursor(selectables);
+                foreach(KSelectable ks in selectables)
+                {
+                    goList.Add(ks.gameObject);
+                }
+                explorerManager.ShowGameObjectList(goList);
                 EndInspecting();
                 //StartCoroutine(ExecuteAfterTime)
                 //Global.Instance.GetInputManager().GetDefaultController().ToggleMouse(false);

@@ -11,6 +11,8 @@ namespace ObjectExplorer
     {
         public static class CONTROLS
         {
+            public static float REFRESH_RATE = .1F;
+
             public static class NONEDITABLE
             {
                 public static Color textColor = Color.grey;
