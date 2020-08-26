@@ -1,4 +1,4 @@
-This is a mod for Oxygen Not Included that allows you to browse through and modify objects at runtime.  Please move the prefabs in Assets/Prefabs to the mod folder /dev/ObjectExplorer/Assets.
+This is a mod for Oxygen Not Included that allows you to browse through and modify objects at runtime.  The post build script automatically moves assets and the compiled .dll to the mods/dev/ObjectExplorer folder.
 
 The inspectors allow you to view various members of components of gameobjects.  
 This mod supports viewing "basic type" members at depth 0 or basic type members at depth 1 that are members of non-basic type memebers at depth 0.  
