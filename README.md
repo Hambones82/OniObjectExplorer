@@ -1,5 +1,7 @@
 This is a mod for Oxygen Not Included that allows you to browse through and modify objects at runtime.  The post build script automatically moves assets and the compiled .dll to the mods/dev/ObjectExplorer folder.
 
+Use tilde (~) to turn the explorer on or off.  This key can be adjusted in TUNING.
+
 The inspectors allow you to view various members of components of gameobjects.  
 This mod supports viewing "basic type" members at depth 0 or basic type members at depth 1 that are members of non-basic type memebers at depth 0.  
 In other words, a member of a component that is a primitive type (e.g., int, bool, string, float), can be viewed.  

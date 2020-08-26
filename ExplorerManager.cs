@@ -120,7 +120,7 @@ namespace ObjectExplorer
         public void SetActive(bool newActive)
         {
             active = newActive;
-            menuRoot.SetActive(newActive);
+            explorerRoot.SetActive(newActive);
             if(newActive == false)
             {
                 reticle.DeActivate();
