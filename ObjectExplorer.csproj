@@ -137,4 +137,8 @@
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>xcopy /y "$(TargetPath)" "%25USERPROFILE%25\Documents\Klei\OxygenNotIncluded\mods\dev\$(ProjectName)\" 
+xcopy /y "$(ProjectDir)Assets\Prefabs\*.*" "%25USERPROFILE%25\Documents\Klei\OxygenNotIncluded\mods\dev\$(ProjectName)\Assets\"</PostBuildEvent>
+  </PropertyGroup>
 </Project>

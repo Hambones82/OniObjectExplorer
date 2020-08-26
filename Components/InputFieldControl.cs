@@ -6,14 +6,13 @@ using UnityEngine;
 using System.Reflection;
 using UnityEngine.UI;
 
-//is it possibly not working for sub-properties?
-//make the abstract class generic.  then the sub-classes will derive from generic with specified type..
+
 namespace ObjectExplorer
 {
-    public class InputFieldControl : ControlBase<string> // : InspectorControl : Monobehaviour???  maybe not necessary?
+    public class InputFieldControl : ControlBase<string> 
     {
        
-        public InputField inputField; //in abstract class, selectable?  or just nothing?  probably nothing, define here.
+        public InputField inputField; 
         
         public override void Refresh()  
         {
@@ -25,14 +24,12 @@ namespace ObjectExplorer
             }
             else
             {
-                Debug.Log($"We are trying to set a particular value in refresh: {value.ToString()}");
                 inputField.text = value.ToString();
             }
         }
 
         public override void SetValue(string valueIn) 
         {
-            Debug.Log($"calling setvalue, valueIn is {valueIn}");
             bool succeeded = false;
             Type typeToConsider = hasSubMember ? currentSubMemberType : currentMemberType; 
             object setVal = null;

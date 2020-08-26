@@ -9,16 +9,12 @@ namespace ObjectExplorer
 {
     public class Reticle
     {
-        //private GameObject reticleImagePrefab;
         private LoadedAssets.AssetEnums reticlePrefabType;
-
-        //rotates clockwise from bottom left to top right, to match rectransform.getworldcorners, though it doesn't actually matter
-
+        
         private GameObject[] corners;
 
         public Reticle(LoadedAssets.AssetEnums rType, GameObject parent)
         {
-            //reticleImagePrefab = prefab;
             reticlePrefabType = rType;
             corners = new GameObject[4];
             for(int i = 0; i < 4; i++)
@@ -31,20 +27,18 @@ namespace ObjectExplorer
         public void SetCurrentGameObject(GameObject GO)
         {
             Vector3[] fourCorners = new Vector3[4];
-            RectTransform rT = GO.GetComponent<RectTransform>();
-            //Transform t = GO.GetComponent<Transform>();
-            if (rT != null)
+            if(GO != null)
             {
-                rT.GetWorldCorners(fourCorners);
-                SetCorners(fourCorners);
-            }
-            /*else if (t != null)
-            {
-                SetOnePoint(t.position);
-            }*/
-            else
-            {
-                DeActivate();
+                RectTransform rT = GO.GetComponent<RectTransform>();
+                if (rT != null)
+                {
+                    rT.GetWorldCorners(fourCorners);
+                    SetCorners(fourCorners);
+                }
+                else
+                {
+                    DeActivate();
+                }
             }
         }
         

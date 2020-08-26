@@ -72,15 +72,12 @@ namespace ObjectExplorer
             }
             set
             {
-                Debug.Log("member set is being called");
                 if (isProperty)
                 {
-                    Debug.Log("set called on property");
                     currentPropertyInfo.SetValue(currentComponent, value, null);
                 }
                 else if (isField)
                 {
-                    Debug.Log("set called on field");
                     currentFieldInfo.SetValue(currentComponent, value);
                 }
                 else
@@ -115,7 +112,6 @@ namespace ObjectExplorer
             }
             set
             {
-                Debug.Log("sub-member set is being called");
                 if (currentMemberType.IsValueType)
                 {
                     object newValueType = currentComponentMember;
@@ -256,6 +252,14 @@ namespace ObjectExplorer
                             canEdit = true;
                         }
                     }
+                    else // member type is a field... sub is a field, member is value type -- can edit
+                    {
+                        canEdit = true;
+                    }
+                }
+                else // sub is a Field and not a value type
+                {
+                    canEdit = true;
                 }
             }
         }

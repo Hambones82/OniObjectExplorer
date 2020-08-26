@@ -122,7 +122,6 @@ namespace ObjectExplorer
                     ilpp.AssetPostProcess(returnVal, parameters);
                 }
             }
-            //returnVal.transform.SetParent(parent);
             return returnVal;
         }
         

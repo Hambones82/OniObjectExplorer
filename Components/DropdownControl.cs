@@ -54,13 +54,11 @@ namespace ObjectExplorer
 
         public override void SetValue(int valueIn)
         {
-            //if trygetvalue, then set...
             object setVal;
             if(enumValueIndices.TryGetValue(valueIn, out setVal))
             {
                 currentTargetValue = setVal;
             }
-            //currentTargetValue = enumValueIndices[valueIn];
         }
 
     }

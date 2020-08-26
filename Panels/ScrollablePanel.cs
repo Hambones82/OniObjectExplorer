@@ -9,13 +9,10 @@ namespace ObjectExplorer
     public abstract class ScrollablePanel
     {   
         protected LoadedAssets.AssetEnums panelType;
-        //protected static GameObject panelPrefab;
 
         protected UIObjectPool uIObjectPool;
-
-        //poniter to the parent object
+        
         protected GameObject panel;
-        //pointer to the content window, into which the buttons will go
         protected GameObject panelContent;
 
         protected List<GameObject> contentObjects = new List<GameObject>();
@@ -23,14 +20,10 @@ namespace ObjectExplorer
         protected GameObject parent;
 
         protected ExplorerManager explorerManager;
-
-        //parent would be passed in, as well as emanager.  ptype is the prefab for the panel itself.   content type is 
-        //                                                                                           unnecessary, as it will be specified
-        //                                                                                           within the poolobjectcreator
+        
         public ScrollablePanel(GameObject parent, ExplorerManager eManager, LoadedAssets.AssetEnums pType)
         {
             panelType = pType;
-            //panelPrefab = LoadedAssets.GetLoadedPrefab(panelType); //probably don't need
             explorerManager = eManager;
             this.parent = parent;
             panel = LoadedAssets.InstantiatePostProcessed(pType, parent.transform);
@@ -39,8 +32,7 @@ namespace ObjectExplorer
         }
 
         protected virtual void SetPosition() { }
-
-        //not sure about this one...
+        
         public virtual void SetCurrentGO(GameObject go) { }
 
         public virtual void RemoveObjects()

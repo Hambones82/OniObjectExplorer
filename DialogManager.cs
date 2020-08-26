@@ -10,8 +10,6 @@ namespace ObjectExplorer
 {
     public class DialogManager
     {
-        //idea here is to have a bunch of different dialog prefabs... 
-        //then override activate dialog with appropriate callback to activate the different prefabs
         private GameObject inputFieldDialog;
         public DialogManager()
         {
@@ -20,7 +18,6 @@ namespace ObjectExplorer
             inputFieldDialog.GetComponent<InternalRefs>()["cancelbutton"].GetComponent<Button>().onClick.AddListener(DeactivateDialog);
             
             inputFieldDialog.SetActive(false);
-            //cancel = 
         }
 
         public void ActivateDialog(UnityAction<string> callBack, string title = "NONE", string bodyText = "NONE")

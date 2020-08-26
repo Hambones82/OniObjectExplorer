@@ -40,7 +40,7 @@ namespace ObjectExplorer
                 int childNum = contentObject.transform.childCount;
                 for(int i = 0; i < childNum; i++)
                 {
-                    inspectorControls.Add(contentObject.transform.GetChild(i).gameObject); //fix
+                    inspectorControls.Add(contentObject.transform.GetChild(i).gameObject); 
                 }
             }
             inspectorGenerator.ClearInspectorControls(inspectorControls);
@@ -53,7 +53,6 @@ namespace ObjectExplorer
             
             foreach(List<GameObject> panelContents in inspectorGenerator.GetComponentControls(C))
             {
-                //create a new panel...
                 GameObject newPanel = uIObjectPool.GetGameObject();
                 contentObjects.Add(newPanel);
                 foreach(GameObject go in panelContents)
@@ -68,7 +67,7 @@ namespace ObjectExplorer
 
         protected override void SetPosition()
         {
-            panel.GetComponent<RectTransform>().SetLocalPosition(new Vector3(800, 0, 0));
+            panel.GetComponent<RectTransform>().SetLocalPosition(new Vector3(772, 0, 0));
         }
     }
 }

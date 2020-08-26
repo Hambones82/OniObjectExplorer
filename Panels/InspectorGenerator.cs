@@ -43,7 +43,6 @@ namespace ObjectExplorer
         
         public IEnumerable<List<GameObject>> GetComponentControls(Component c)
         {
-            Debug.Log("getting inspectors");
             currentContentObjects.Clear();
             Type cType = c.GetType();
             if(InspectorSpecifications.ComponentSpecifications.ContainsKey(cType))
@@ -176,11 +175,9 @@ namespace ObjectExplorer
         {
             List<GameObject> returnObject = new List<GameObject>();
             returnObject.Add(GetLabelObject(memberInfo.Name + suffix));
-            //select appropriate function based on targetType
             if(targetType == typeof(string) || targetType == typeof(int) || targetType == typeof(float))
             {
-                returnObject.Add(GetIFieldObject(c, memberInfo, subMemberInfo)); //fix this to be generic -- i.e., type determines which fn to call
-                                                                                 //might need to pass in that type
+                returnObject.Add(GetIFieldObject(c, memberInfo, subMemberInfo)); 
             }
             else if(targetType == typeof(bool))
             {
@@ -192,7 +189,7 @@ namespace ObjectExplorer
             }
             else
             {
-                //this should not happen
+                throw new InvalidOperationException("trying to draw a control for an invalid type - not sure how you got here.");
             }
             return returnObject;
         }
@@ -255,7 +252,6 @@ namespace ObjectExplorer
                 }
                 if(tag.prefabType == LoadedAssets.AssetEnums.inspectortoggle)
                 {
-                    Debug.Log("recycling toggle");
                     togglePool.RecycleObject(control);
                 }
                 if(tag.prefabType == LoadedAssets.AssetEnums.inspectordropdown)
@@ -267,7 +263,6 @@ namespace ObjectExplorer
 
         public void RefreshInspectors()
         {
-            Debug.Log("refreshing...");
             foreach(ControlBase cb in currentContentObjects)
             {
                 cb.Refresh();

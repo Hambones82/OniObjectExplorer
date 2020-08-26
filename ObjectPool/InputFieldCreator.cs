@@ -5,7 +5,7 @@ using System.Text;
 using UnityEngine;
 
 namespace ObjectExplorer
-{//remove the explorer manager thing 
+{ 
     public class InputFieldCreator : IPoolObjectCreator
     {
         private LoadedAssets.AssetEnums fieldPrefabType;

@@ -13,7 +13,6 @@ namespace ObjectExplorer
         public ButtonPanel(GameObject parent, ExplorerManager eManager, LoadedAssets.AssetEnums pType, LoadedAssets.AssetEnums bType)
             : base(parent, eManager, pType)
         {
-            //the uiobject pool is of button type.  in other words, it is of the type specified in the argument to the constructor
             uIObjectPool = ButtonPoolFactory.GetPathButtonPool(bType);
         }
 

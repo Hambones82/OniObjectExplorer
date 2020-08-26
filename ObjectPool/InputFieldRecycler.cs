@@ -12,9 +12,7 @@ namespace ObjectExplorer
 
         public GameObject RecycleObject(GameObject go)
         {
-            //go.GetComponent<InputFieldCallbacks>().callBacks.RemoveAllListeners();
             InputField retInputField = go.GetComponent<InputField>();
-            //below: no... object changes shape, should use a different method...
             foreach (Text text in retInputField.GetComponentsInChildren<Text>())
             {
                 text.color = TUNING.CONTROLS.EDITABLE.textColor;

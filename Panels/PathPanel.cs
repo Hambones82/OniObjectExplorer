@@ -33,10 +33,9 @@ namespace ObjectExplorer
             {
                 GameObject currentGoClosureCopy = currentPathTraverse;
                 GameObject newButton = uIObjectPool.GetGameObject();
-                newButton.transform.SetParent(panelContent.transform); //must be done in all panels
+                newButton.transform.SetParent(panelContent.transform); 
                 SetBtnText(newButton, currentPathTraverse.name + "\\");
                 SetOnClick(newButton, () => explorerManager.SetCurrentGameObject(currentGoClosureCopy));
-                //at some point, all of the buttons need to be parented to the panel...
                 newButton.transform.SetAsFirstSibling();
                 contentObjects.Add(newButton);
                 newButton.SetActive(true);

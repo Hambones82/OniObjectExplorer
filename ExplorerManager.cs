@@ -9,6 +9,7 @@ namespace ObjectExplorer
 {
     public class ExplorerManager
     {
+        public GameObject explorerRoot { get; private set; }
         public GameObject menuRoot { get; private set; }
         public GameObject inputController { get; private set; }
         public bool active { get; private set; }
@@ -25,39 +26,50 @@ namespace ObjectExplorer
         private MainButtonMenu buttonMenu;
 
         private Reticle reticle;
-        
+
+        private ExplorerInputHandler inputHandler;
+
+
         public ExplorerManager()
         {
             Globals.DebugCanvas = LoadedAssets.InstantiatePostProcessed(LoadedAssets.AssetEnums.debugcanvas);
             
             menuRoot = new GameObject("DebugRoot");
+            explorerRoot = new GameObject("ExplorerRoot");
+            
 
-            moveHandle = new MoveHandle(menuRoot, menuRoot);
-            moveHandle.moveHandle.GetComponent<RectTransform>().SetPosition(new Vector3(350, 180,0));
+            moveHandle = new MoveHandle(explorerRoot, explorerRoot);
+            moveHandle.moveHandle.GetComponent<RectTransform>().SetPosition(new Vector3(-100, 180,0));
 
             inputController = new GameObject("InputController");
-            ExplorerInputHandler inputHandler = inputController.AddComponent<ExplorerInputHandler>();
+            inputHandler = inputController.AddComponent<ExplorerInputHandler>();
             inputHandler.SetExplorerManager(this);
 
-            menuRoot.transform.parent = Globals.DebugCanvas.transform;
+            explorerRoot.transform.parent = Globals.DebugCanvas.transform;
+            RectTransform explRect = explorerRoot.AddComponent<RectTransform>();
+            explRect.anchorMin = new Vector2(.5f, .5f);
+            explRect.anchorMax = new Vector2(.5f, .5f);
+            explRect.SetLocalPosition(new Vector3(0, 0, 0));
+            menuRoot.transform.parent = explorerRoot.transform;
             RectTransform rectT = menuRoot.AddComponent<RectTransform>();
             rectT.anchorMin = new Vector2(.5f, .5f);
             rectT.anchorMax = new Vector2(.5f, .5f);
-            rectT.SetLocalPosition(new Vector3(-350, -200, 0));
+            rectT.SetLocalPosition(new Vector3(0, 0, 0));
             childrenPanel = new ChildrenPanel(menuRoot, this);
             pathPanel = new PathPanel(menuRoot, this);
             inspectorPanel = new InspectorPanel(menuRoot, this);
             componentsPanel = new ComponentsPanel(menuRoot, this);
-            SetActive(false);
             reticle = new Reticle(LoadedAssets.AssetEnums.reticle, Globals.DebugCanvas);
 
+            SetActive(false);
+            
             dialogManager = new DialogManager();
 
             buttonMenu = new MainButtonMenu(menuRoot);
-            buttonMenu.SetPosition(new Vector2(350, 165));
+            buttonMenu.SetPosition(new Vector2(-100, 165));
 
-            //should be in the button menu itself? -- i think we should integrate this more into the menu..
-            buttonMenu.AddButton("Browse by Path", () => dialogManager.ActivateDialog((string s) => 
+            
+            buttonMenu.AddButton("Browse by Object Name", () => dialogManager.ActivateDialog((string s) => 
             {
                 GameObject browseTo = GameObjectPathParser.GetGOFromPath(s);
                 if(browseTo != null)
@@ -69,7 +81,6 @@ namespace ObjectExplorer
             buttonMenu.AddButton("Inspect", () =>
             {
                 inputHandler.StartInspecting(); //ugly...??  have a separate class handle this -- shouldn't be too hard.
-                //Global.Instance.GetInputManager().GetDefaultController().ToggleMouse(true);
             });
             buttonMenu.AddButton("New UI", () =>
             {
@@ -110,6 +121,18 @@ namespace ObjectExplorer
         {
             active = newActive;
             menuRoot.SetActive(newActive);
+            if(newActive == false)
+            {
+                reticle.DeActivate();
+                if(inputHandler != null)
+                {
+                    inputHandler.EndInspecting();
+                }
+            }
+            if(newActive == true)
+            {
+                reticle.SetCurrentGameObject(currentGameObject);
+            }
         }
         
         public void SetCurrentGameObject(GameObject go)
@@ -129,15 +152,6 @@ namespace ObjectExplorer
             if (C == null) return;
             currentComponent = C;
             inspectorPanel.SetComponent(C);
-        }
-
-        //fix.  possibly: just refresh all values of the controls, instead of deleting them all, cleaning them up, and re-instating...
-        //i might need to modify the controls to be actual components...  
-        public void Refresh()
-        {
-            //Component cachedCurrentComponent = currentComponent;
-            //SetCurrentGameObject(currentGameObject);
-            //SetCurrentComponent(cachedCurrentComponent);
         }
 
         public void ShowGameObjectList(List<GameObject> goList)

@@ -38,9 +38,5 @@ namespace ObjectExplorer
                 newButton.SetActive(true);
             }
         }
-
-
-
-
     }
 }

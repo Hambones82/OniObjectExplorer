@@ -8,7 +8,7 @@ namespace ObjectExplorer
 {
     public static class Globals
     {
-        public static GameObject DebugCanvas;// = GameScreenManager.Instance.ssOverlayCanvas;
+        public static GameObject DebugCanvas;
         public static int debugCounter = 0;
     }
 }

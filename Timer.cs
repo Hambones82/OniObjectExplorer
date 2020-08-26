@@ -17,12 +17,9 @@ namespace ObjectExplorer
 
         public void Update()
         {
-            Debug.Log($"delta time: {Time.unscaledDeltaTime}");
-            Debug.Log($"timer value is: {counter}");
             counter += Time.unscaledDeltaTime;
             while(counter > period)
             {
-                Debug.Log("invoking callbacks for timer");
                 counter -= period;
                 timerCallback.Invoke();
             }

@@ -7,8 +7,6 @@ using UnityEngine.UI;
 
 namespace ObjectExplorer
 {
-    //this also needs to add the select component thing that disables keyboard on select.
-    //i already have the component --it's "disablekleikeyboardonselect"
     public class UnityFieldDisablesKleiKeyboardPostProcessor : ILoadedAssetPostProcessor
     {
         public GameObject AssetPostProcess(GameObject go, object parameters = null)
@@ -17,9 +15,6 @@ namespace ObjectExplorer
             foreach(InputField iF in components)
             {
                 iF.gameObject.AddComponent<DisableKleiKeyboardOnSelect>();
-                //need to think carefully about exactly what events trigger this...
-                //this might be acceptable behavior for now...
-                //iF.onEndEdit.AddListener((string s) => Global.Instance.GetInputManager().GetDefaultController().ToggleKeyboard(false));
             }
             return go;
         }

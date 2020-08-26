@@ -10,10 +10,8 @@ namespace ObjectExplorer
 {
     public class InspectorRecycler : IPoolObjectRecycler
     {
-        //recycling the whole object -- yes
         public GameObject RecycleObject(GameObject go)
         {
-            //go.GetComponentInChildren<InputFieldCallbacks>().callBacks.RemoveAllListeners();
             go.SetActive(false);
             return go;
         }

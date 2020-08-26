@@ -9,12 +9,10 @@ namespace ObjectExplorer
     public class ButtonCreator : IPoolObjectCreator
     {
         private LoadedAssets.AssetEnums buttonPrefabType;
-        //private GameObject buttonPrefab;
 
         public ButtonCreator(LoadedAssets.AssetEnums buttonType)
         {
             buttonPrefabType = buttonType;
-            //buttonPrefab = LoadedAssets.GetLoadedPrefab(buttonPrefabType);
         }
 
         public GameObject CreateNewPoolObject()

@@ -9,8 +9,7 @@ namespace ObjectExplorer
     class InspectorCreator : IPoolObjectCreator
     {
         private LoadedAssets.AssetEnums inspectorHolderType;
-
-        //need to fix this...
+        
         public InspectorCreator(LoadedAssets.AssetEnums holderType)
         {
             inspectorHolderType = holderType;

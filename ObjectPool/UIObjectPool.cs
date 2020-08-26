@@ -13,9 +13,7 @@ namespace ObjectExplorer
 
         public IPoolObjectCreator poolObjectCreator;
         public IPoolObjectRecycler poolObjectRecycler;
-
-        //why have a type and a parent... i think we should get rid of these.
-        //trying to call methods from an object that hasn't yet been set.  probably want to include those in the constructor args
+        
         public UIObjectPool(IPoolObjectCreator objectCreator, IPoolObjectRecycler objectRecycler)
         {
             poolObjectCreator = objectCreator;
@@ -44,7 +42,7 @@ namespace ObjectExplorer
         {
             poolObjectRecycler.RecycleObject(go);
             go.SetActive(false);
-            go.transform.SetParent(Globals.DebugCanvas.transform);//maybe???
+            go.transform.SetParent(Globals.DebugCanvas.transform);
             availableObjects.Push(go);
         }
     }

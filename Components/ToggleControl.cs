@@ -13,7 +13,6 @@ namespace ObjectExplorer
 
         public override void Refresh()
         {
-            //object value = GetCurrentValue();
             toggleHelper.SetIsOn((bool)currentTargetValue);
         }
 

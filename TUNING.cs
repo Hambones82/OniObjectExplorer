@@ -6,7 +6,6 @@ using UnityEngine;
 
 namespace ObjectExplorer
 {
-    //all this stuff needs to be imported from the scriptable object... otherwise, we need to update styling in two places...
     public static class TUNING
     {
         public static class CONTROLS
@@ -28,7 +27,7 @@ namespace ObjectExplorer
         {
             public static class KEYS
             {
-                public static KeyCode debugEnable = KeyCode.Menu;
+                public static KeyCode debugEnable = KeyCode.BackQuote;
             }
         }
     }
