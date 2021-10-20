@@ -1,3 +1,5 @@
+Please see https://www.youtube.com/channel/UCpjYTAX_acMvyMwf_ODm5hw for the capabilities for this mod.
+
 This is a mod for Oxygen Not Included that allows you to browse through and modify objects at runtime.  The post build script automatically moves assets and the compiled .dll to the mods/dev/ObjectExplorer folder.
 
 Use tilde (~) to turn the explorer on or off.  This key can be adjusted in TUNING.
